@@ -1,0 +1,343 @@
+:root {
+    --bg-bright: #050B1A;
+    --paper-light: #0A142F;
+    --surface-white: #0F1C3F;
+    --charcoal: #F8FAFC;
+    --charcoal-muted: #94A3B8;
+    --amber-gold: #E2B13C;
+    --terracotta: #38BDF8;
+    --warm-border: rgba(226, 177, 60, 0.25);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-bright);
+    color: var(--charcoal);
+    overflow-x: hidden;
+}
+
+/* WebGL Background Canvas */
+#webgl-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.75;
+}
+
+/* Royal Navy Glassmorphism Classes */
+.glass-card-light {
+    background: rgba(15, 28, 63, 0.72) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(226, 177, 60, 0.25) !important;
+    box-shadow: 0 10px 30px -5px rgba(2, 6, 23, 0.6) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    color: var(--charcoal) !important;
+}
+
+.glass-card-light:hover {
+    border-color: rgba(226, 177, 60, 0.6) !important;
+    box-shadow: 0 16px 35px -5px rgba(226, 177, 60, 0.2) !important;
+}
+
+.glass-nav-light {
+    background: rgba(5, 11, 26, 0.88) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(226, 177, 60, 0.25) !important;
+}
+
+/* Neumorphism Royal Navy Accents */
+.neumorph-button-light {
+    background: linear-gradient(135deg, #13224E, #0A142F) !important;
+    box-shadow: 5px 5px 14px rgba(2, 6, 23, 0.7), -3px -3px 8px rgba(26, 46, 99, 0.4) !important;
+    transition: all 0.2s ease;
+    color: var(--charcoal) !important;
+}
+
+.neumorph-button-light:hover {
+    box-shadow: 2px 2px 6px rgba(2, 6, 23, 0.7), -1px -1px 4px rgba(26, 46, 99, 0.4) !important;
+    transform: translateY(-1px);
+}
+
+/* 3D Parallax Tilt Container */
+.tilt-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* Gold Pill Tags */
+.tag-amber-outline {
+    border: 1px solid var(--amber-gold) !important;
+    color: var(--amber-gold) !important;
+    font-family: 'IBM Plex Mono', monospace;
+    background: rgba(15, 28, 63, 0.8) !important;
+}
+
+.tag-amber-filled {
+    background-color: rgba(226, 177, 60, 0.18) !important;
+    color: var(--amber-gold) !important;
+    border: 1px solid rgba(226, 177, 60, 0.4) !important;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-bright);
+}
+::-webkit-scrollbar-thumb {
+    background: #1E293B;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--amber-gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    #webgl-canvas {
+        display: none;
+    }
+}
+
+/* Vertical Infinite Marquee Animations */
+@keyframes marqueeVerticalUp {
+    0% { transform: translateY(0%); }
+    100% { transform: translateY(-50%); }
+}
+
+@keyframes marqueeVerticalDown {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0%); }
+}
+
+.marquee-track-up {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    animation: marqueeVerticalUp 110s linear infinite;
+}
+
+.marquee-track-down {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    animation: marqueeVerticalDown 110s linear infinite;
+}
+
+.marquee-track-up:hover,
+.marquee-track-down:hover {
+    animation-play-state: paused !important;
+}
+
+/* Full-Height Spanning Banner Pillar CSS */
+.marquee-banner-pillar-full {
+    background: rgba(8, 16, 38, 0.92) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 0 25px rgba(226, 177, 60, 0.15) !important;
+    border-radius: 0 !important;
+}
+
+/* Top/Bottom Gradient Dissolve Mask */
+.vertical-marquee-mask {
+    mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+/* Logo Card Styling inside Pillar */
+.marquee-logo-card {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.65rem;
+    background: #0F1C3F !important;
+    border: 1px solid rgba(226, 177, 60, 0.25) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0.4rem;
+}
+
+@media (min-width: 1024px) {
+    .marquee-logo-card {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+}
+
+.marquee-logo-card:hover {
+    transform: scale(1.15);
+    border-color: rgba(226, 177, 60, 0.85) !important;
+    box-shadow: 0 8px 22px rgba(226, 177, 60, 0.35) !important;
+    background: #172A5E !important;
+}
+
+/* Translucent Metallic Gold Pop-up Card */
+.glass-popup-translucent {
+    background: rgba(8, 16, 38, 0.92) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: 0 20px 45px rgba(2, 6, 23, 0.8), 0 0 25px rgba(226, 177, 60, 0.25) !important;
+}
+
+/* ====================================
+   DEDICATED ROYAL NAVY FOOTER STYLING
+   ==================================== */
+.site-footer {
+    background-color: #020512 !important;
+    border-top: 1px solid rgba(226, 177, 60, 0.35) !important;
+    color: #CBD5E1 !important;
+}
+
+.site-footer-border {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.site-footer-links a {
+    color: #E2E8F0 !important;
+    transition: color 0.2s ease;
+}
+
+.site-footer-links a:hover {
+    color: #E2B13C !important;
+}
+
+.site-footer-text {
+    color: #94A3B8 !important;
+}
+
+/* The map style is here */
+/* Pin Base Wrapper */
+.glow-pin-wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    z-index: 25;
+    pointer-events: none;
+}
+
+/* 1. Standard Pin Dot (Reduced from 0.75rem -> 0.5rem) */
+.glow-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #F5A623;
+    border-radius: 9999px;
+    border: 1.5px solid #FFFFFF;
+    box-shadow: 0 0 6px #F5A623, 0 0 12px #D97706;
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+/* 2. Terracotta Dot (Reduced from 0.75rem -> 0.5rem) */
+.glow-dot-terracotta {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #E05A36;
+    border-radius: 9999px;
+    border: 1.5px solid #FFFFFF;
+    box-shadow: 0 0 6px #E05A36;
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+/* 3. Pulse Ring (Reduced from 1.6rem -> 1.1rem) */
+.glow-pulse-ring {
+    position: absolute;
+    width: 1.1rem;
+    height: 1.1rem;
+    background-color: rgba(245, 166, 35, 0.5);
+    border-radius: 9999px;
+    animation: glowPulse 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+    z-index: 1;
+}
+
+@keyframes glowPulse {
+    0% { transform: scale(0.6); opacity: 1; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* 4. Head Office Star Icon (Reduced from 1.35rem -> 0.95rem) */
+.hq-star-center {
+    width: 0.95rem;
+    height: 0.95rem;
+    background-color: #D97706;
+    border-radius: 9999px;
+    border: 1.5px solid #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px #F5A623, 0 0 20px #D97706;
+    z-index: 3;
+}
+
+.hq-glow-halo {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: rgba(217, 119, 6, 0.6);
+    border-radius: 9999px;
+    animation: hqGlowHalo 1.8s infinite ease-out;
+    z-index: 1;
+}
+
+@keyframes hqGlowHalo {
+    0% { transform: scale(0.7); opacity: 1; }
+    100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* 5. Text Label Badges (Font size reduced from 10px -> 8.5px) */
+.glow-pin-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 900;
+    color: #141210;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(8px);
+    padding: 1.5px 4px;
+    border-radius: 3px;
+    border: 1px solid rgba(217, 119, 6, 0.4);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+    position: absolute;
+}
+
+/* Offset Distances from Pin */
+.label-pos-right {
+    left: 0.8rem;
+}
+
+.label-pos-left {
+    right: 0.8rem;
+}
+
+/* Head Office Badge */
+.hq-gold-badge {
+    left: 1.1rem;
+    background: #D97706;
+    color: #FFFFFF;
+    font-size: 8.5px;
+    letter-spacing: 0.4px;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 0 10px rgba(217, 119, 6, 0.5);
+}
+
+@media (max-width: 640px) {
+    .glow-pin-label {
+        font-size: 7px;
+        padding: 1px 3px;
+    }
+}

@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Sai Dhanada Enterprises | Debt Recovery Agency & Management</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Lenis Smooth Scroll CDN
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script> -->
+
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    bgBright: '#050B1A',
+                    paperLight: '#0A142F',
+                    surfaceWhite: '#0F1C3F',
+                    charcoal: '#F8FAFC',
+                    charcoalMuted: '#94A3B8',
+                    amberGold: '#E2B13C',
+                    terracotta: '#38BDF8',
+                    warmBorder: 'rgba(226, 177, 60, 0.25)',
+                },
+                fontFamily: {
+                    heading: ['Space Grotesk', 'sans-serif'],
+                    body: ['Inter', 'sans-serif'],
+                    mono: ['IBM Plex Mono', 'monospace'],
+                }
+            }
+        }
+    }
+</script>
+    <!-- External Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="antialiased selection:bg-amberGold selection:text-white relative">
+
+    <!-- LEFT FULL-HEIGHT VERTICAL BANNER -->
+    <aside class="fixed left-0 top-0 bottom-0 z-30 hidden md:flex flex-col w-16 lg:w-20 marquee-banner-pillar-full border-r border-amberGold/25 overflow-hidden pointer-events-auto">
+        <div class="relative flex-1 overflow-hidden vertical-marquee-mask my-2">
+            <div id="marqueeTrackLeft" class="marquee-track-up px-2 lg:px-3">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </aside>
+
+    <!-- RIGHT FULL-HEIGHT VERTICAL BANNER -->
+    <aside class="fixed right-0 top-0 bottom-0 z-30 hidden md:flex flex-col w-16 lg:w-20 marquee-banner-pillar-full border-l border-amberGold/25 overflow-hidden pointer-events-auto">
+        <div class="relative flex-1 overflow-hidden vertical-marquee-mask my-2">
+            <div id="marqueeTrackRight" class="marquee-track-down px-2 lg:px-3">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </aside>
+    
+    <!-- WebGL Canvas Background -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Bright Glassmorphic Navigation -->
+    <header class="sticky top-0 z-40 glass-nav-light transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="flex items-center gap-3 group">
+                    <img src="images/0.png" alt="Sri Sai Dhanada Enterprises Logo" class="w-10 h-10 object-contain">
+                    <div>
+                        <span class="font-heading font-bold text-base tracking-tight text-charcoal block leading-none">SRI SAI DHANADA</span>
+                        <span class="font-mono text-[10px] tracking-widest text-amberGold uppercase block mt-1 font-bold">ENTERPRISES</span>
+                    </div>
+                </a>
+
+                <nav class="hidden xl:flex items-center gap-6 font-mono text-xs uppercase tracking-wider text-charcoalMuted font-semibold">
+                    <a href="#about" class="hover:text-amberGold transition-colors">About</a>
+                    <a href="#services" class="hover:text-amberGold transition-colors">Services</a>
+                    <a href="#operations" class="hover:text-amberGold transition-colors">Operations</a>
+                    <a href="#portfolio" class="hover:text-amberGold transition-colors">Portfolio</a>
+                    <a href="#compliance" class="hover:text-amberGold transition-colors">Compliance</a>
+                    <a href="#references" class="hover:text-amberGold transition-colors">References</a>
+                    <a href="#contact" class="hover:text-amberGold transition-colors">Contact</a>
+                    <a href="faq.html" class="hover:text-amberGold transition-colors font-bold">FAQ</a>
+                </nav>
+
+                <div class="hidden sm:flex items-center gap-4">
+                    <a href="#contact" class="px-5 py-2.5 rounded font-mono text-xs font-bold uppercase tracking-wider bg-amberGold text-white hover:bg-charcoal transition-all shadow-md shadow-amberGold/20 flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base text-white"></i>
+                        <span>Enquire Now</span>
+                    </a>
+                </div>
+
+                <button id="menuToggle" class="xl:hidden p-2 text-charcoal hover:text-amberGold focus:outline-none" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileDropdown" class="hidden xl:hidden bg-bgBright border-b border-amberGold/20 px-4 pt-3 pb-6 space-y-3 font-mono text-xs uppercase tracking-wider">
+            <a href="#about" class="block py-2 text-charcoalMuted hover:text-amberGold">About</a>
+            <a href="#services" class="block py-2 text-charcoalMuted hover:text-amberGold">Services</a>
+            <a href="#operations" class="block py-2 text-charcoalMuted hover:text-amberGold">Operations</a>
+            <a href="#portfolio" class="block py-2 text-charcoalMuted hover:text-amberGold">Portfolio</a>
+            <a href="#compliance" class="block py-2 text-charcoalMuted hover:text-amberGold">Compliance</a>
+            <a href="#references" class="block py-2 text-charcoalMuted hover:text-amberGold">References</a>
+            <a href="faq.html" class="block py-2 text-charcoalMuted hover:text-amberGold">FAQ</a>
+            <a href="#contact" class="block py-2 text-amberGold font-bold">Contact Us</a>
+        </div>
+    </header>
+
+    <!-- SECTION 1: HERO -->
+    <section class="relative pt-16 pb-24 lg:pt-24 lg:pb-28 overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card-light text-amberGold font-mono text-xs uppercase tracking-widest border border-amberGold/30 font-semibold shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-terracotta animate-ping"></span>
+                    <span>DEBT RECOVERY AGENCY & MANAGEMENT</span>
+                </div>
+
+                <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-charcoal uppercase leading-tight">
+                    Sri Sai Dhanada <span class="text-amberGold">Enterprises</span>
+                </h1>
+
+                <p class="text-charcoalMuted text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-3xl">
+                    A professional debt-recovery and collections agency serving leading Banks & NBFCs across Andhra Pradesh, Telangana & Odisha — built on two decades of field-tested experience and an unwavering belief that <strong class="text-charcoal font-semibold">“Quality attracts Clients.”</strong>
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-2.5">
+                    <span class="tag-amber-outline px-3.5 py-1.5 rounded text-xs uppercase font-medium">COLLECTIONS</span>
+                    <span class="tag-amber-outline px-3.5 py-1.5 rounded text-xs uppercase font-medium">DEBT RECOVERY</span>
+                    <span class="tag-amber-outline px-3.5 py-1.5 rounded text-xs uppercase font-medium">SKIP TRACING</span>
+                    <span class="tag-amber-outline px-3.5 py-1.5 rounded text-xs uppercase font-medium">VERIFICATIONS</span>
+                </div>
+
+                <div class="pt-2 flex flex-wrap justify-center gap-4">
+                    <a href="#contact" class="px-8 py-3.5 rounded font-mono text-xs font-bold uppercase tracking-wider bg-amberGold text-white hover:bg-charcoal hover:scale-105 transition-all shadow-xl shadow-amberGold/25">
+                        Get in Touch
+                    </a>
+                    <a href="#services" class="px-8 py-3.5 rounded glass-card-light font-mono text-xs font-bold uppercase tracking-wider text-charcoal hover:border-amberGold transition-all">
+                        Our Services
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-5 parallax-container">
+                <div class="glass-card-light tilt-card p-6 rounded text-left data-parallax" data-speed="0.05">
+                    <div class="font-mono text-3xl sm:text-4xl font-bold text-amberGold tracking-tight">
+                        <span class="counter" data-target="2006">0</span>
+                    </div>
+                    <div class="font-mono text-xs uppercase text-charcoalMuted font-semibold tracking-wider mt-2">Experience Since</div>
+                </div>
+
+                <div class="glass-card-light tilt-card p-6 rounded text-left data-parallax" data-speed="0.08">
+                    <div class="font-mono text-3xl sm:text-4xl font-bold text-amberGold tracking-tight">
+                        ₹<span class="counter" data-target="400">0</span> Cr+
+                    </div>
+                    <div class="font-mono text-xs uppercase text-charcoalMuted font-semibold tracking-wider mt-2">Monthly Portfolio</div>
+                </div>
+
+                <div class="glass-card-light tilt-card p-6 rounded text-left data-parallax" data-speed="0.04">
+                    <div class="font-mono text-3xl sm:text-4xl font-bold text-amberGold tracking-tight">
+                        <span class="counter" data-target="260">0</span>+
+                    </div>
+                    <div class="font-mono text-xs uppercase text-charcoalMuted font-semibold tracking-wider mt-2">Professionals</div>
+                </div>
+
+                <div class="glass-card-light tilt-card p-6 rounded text-left data-parallax" data-speed="0.07">
+                    <div class="font-mono text-3xl sm:text-4xl font-bold text-amberGold tracking-tight">
+                        <span class="counter" data-target="9">0</span>
+                    </div>
+                    <div class="font-mono text-xs uppercase text-charcoalMuted font-semibold tracking-wider mt-2">Branch Network</div>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <span class="font-mono text-xs text-charcoalMuted uppercase tracking-widest font-semibold">Company Profile — Andhra Pradesh | Telangana | Odisha</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map begins here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+    <!-- 3D INDIA MAP SECTION WITH MAP.PNG -->
+    <section id="map-3d-section" class="py-20 relative z-10 border-t border-amberGold/15 bg-paperLight/60">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-center">
+            
+            <!-- Section Header -->
+            <div class="max-w-2xl mx-auto space-y-2">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">OUR PRESENCE</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal uppercase">Branch Locations Across India</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Head Office & Regional Branch Network</p>
+            </div>
+
+            <!-- Clean Map Image Wrapper (NO Outer Card Container) -->
+            <div class="relative w-full aspect-square max-w-2xl mx-auto rounded-2xl overflow-hidden border border-amberGold/30 shadow-2xl">
+                
+                <!-- 3D India Relief Map Image -->
+                <img src="images/map.png" alt="India 3D Relief Map" class="w-full h-full object-cover">
+
+                <!-- ==================== ACCURATE GLOWING LOCATION PINS ==================== -->
+
+                <!-- 1. VISAKHAPATNAM (HEAD OFFICE) — HIGHLIGHTED GOLDEN STAR -->
+                <div class="glow-pin-wrapper" style="top: 63%; left: 54%;">
+                    <div class="hq-glow-halo"></div>
+                    <div class="hq-star-center"><i class="fa-solid fa-star text-[7px] text-white"></i></div>
+                    <span class="glow-pin-label hq-gold-badge text-xs">VISAKHAPATNAM (HEAD OFFICE)</span>
+                </div>
+
+                <!-- 2. Visakhapatnam - Madhavadhara II -->
+                <div class="glow-pin-wrapper" style="top: 63%; left: 53%;">
+                    <span class="glow-pulse-ring"></span>
+                    <span class="glow-dot-terracotta"></span>
+                    <!-- <span class="glow-pin-label label-pos-right">Madhavadhara II</span> -->
+                </div>
+
+                <!-- 3. Bhubaneswar (Odisha) -->
+                <div class="glow-pin-wrapper" style="top: 56.7%; left: 56.9%;">
+                    <span class="glow-pulse-ring"></span>
+                    <span class="glow-dot"></span>
+                    <!-- <span class="glow-pin-label label-pos-right">Bhubaneswar (Odisha)</span> -->
+                </div>
+
+                <!-- 4. Vijayawada -->
+                <div class="glow-pin-wrapper" style="top: 67.72%; left: 46%;">
+                    <span class="glow-pulse-ring"></span>
+                    <span class="glow-dot"></span>
+                    <!-- <span class="glow-pin-label label-pos-right">Vijayawada</span> -->
+                </div>
+
+                <!-- 5. Guntur -->
+                <div class="glow-pin-wrapper" style="top: 67%; left: 47%;">
+                    <span class="glow-pulse-ring"></span>
+                    <span class="glow-dot"></span>
+                    <!-- <span class="glow-pin-label label-pos-left">Guntur</span> -->
+                </div>
+
+                <!-- 6. Secunderabad -->
+                <div class="glow-pin-wrapper" style="top: 63.8%; left: 40%;">
+                    <span class="glow-pulse-ring"></span>
+                    <span class="glow-dot"></span>
+                    <!-- <span class="glow-pin-label label-pos-left">Secunderabad</span> -->
+                </div>
+
+                <!-- 7. Warangal -->
+                <div class="glow-pin-wrapper" style="top: 63.2%; left: 42.1%;">
+                    <span class="glow-pulse-ring"></span>
+                    <span class="glow-dot"></span>
+                    <!-- <span class="glow-pin-label label-pos-right">Warangal</span> -->
+                </div>
+
+                <!-- 8. Karimnagar -->
+                <div class="glow-pin-wrapper" style="top: 62.3%; left: 40.5%;">
+                    <span class="glow-pulse-ring"></span>
+                    <span class="glow-dot"></span>
+                    <!-- <span class="glow-pin-label label-pos-left">Karimnagar</span> -->
+                </div>
+
+                <!-- 9. Nellore -->
+                <div class="glow-pin-wrapper" style="top: 73%; left: 42.7%;">
+                    <span class="glow-pulse-ring"></span>
+                    <span class="glow-dot"></span>
+                    <!-- <span class="glow-pin-label label-pos-right">Nellore</span> -->
+                </div>
+
+                <!-- 10. Kadapa -->
+                <div class="glow-pin-wrapper" style="top: 73.3%; left:39.4%;">
+                    <span class="glow-pulse-ring"></span>
+                    <span class="glow-dot"></span>
+                    <!-- <span class="glow-pin-label label-pos-left">Kadapa</span> -->
+                </div>
+
+            </div>
+
+            <!-- Legend Bar Below Map -->
+            <!-- <div class="pt-2 flex flex-wrap items-center justify-center gap-6 font-mono text-xs text-charcoalMuted">
+                <div class="flex items-center gap-2">
+                    <span class="w-4 h-4 rounded-full bg-amberGold flex items-center justify-center text-[8px] text-white font-bold shadow-md"><i class="fa-solid fa-star"></i></span>
+                    <span class="font-bold text-charcoal">Head Office (Visakhapatnam)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-amberGold shadow-sm"></span>
+                    <span>Regional Branch Network (10 Locations)</span>
+                </div>
+            </div> -->
+        </div>
+    </section>
+    <!-- Map ends here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+    <!-- SECTION 2: INTRODUCTION / PARTNER LETTER -->
+    <section class="py-20 relative z-10 border-t border-amberGold/15 bg-paperLight/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">INTRODUCTION</div>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal">A Word to Our Partners</h2>
+                    
+                    <div class="glass-card-light p-8 rounded border border-amberGold/20 space-y-4 text-charcoalMuted leading-relaxed font-body text-sm sm:text-base">
+                        <p class="font-semibold text-charcoal">To The Manager,</p>
+                        <p>Sir / Madam,</p>
+                        <p>
+                            We are pleased to enclose a brief profile giving complete details about our background and our present activities. We have endeavoured to furnish all the information you may require; should you need any further details, please do contact us.
+                        </p>
+                        <p>
+                            If we are likely to be considered, we shall be happy to meet you at your convenience for a discussion. Thanking you, and assuring you the best of our attention at all times.
+                        </p>
+                        <div class="pt-4 border-t border-amberGold/15">
+                            <p class="italic text-charcoalMuted font-mono text-xs">Very truly yours,</p>
+                            <p class="font-bold text-charcoal mt-1">For SRI SAI DHANADA ENTERPRISES</p>
+                            <p class="font-mono text-xs text-amberGold font-bold mt-0.5">S. Mohith | Proprietor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="neumorph-button-light text-charcoal p-8 rounded border border-amberGold/20 space-y-6">
+                        <div>
+                            <span class="font-mono text-xs text-amberGold uppercase tracking-widest font-bold block">CORPORATE IDENTIFICATION</span>
+                            <h3 class="font-heading text-xl font-bold text-charcoal mt-1">Registered Business Details</h3>
+                        </div>
+
+                        <div class="space-y-4 font-mono text-xs divide-y divide-amberGold/15">
+                            <div class="pt-2 flex flex-col gap-1">
+                                <span class="text-charcoalMuted uppercase text-[10px]">LEGAL NAME</span>
+                                <span class="text-charcoal font-semibold text-sm">Sri Sai Dhanada Enterprises</span>
+                            </div>
+
+                            <div class="pt-3 flex flex-col gap-1">
+                                <span class="text-charcoalMuted uppercase text-[10px]">CONSTITUTION</span>
+                                <span class="text-charcoal font-medium">Proprietorship Firm</span>
+                            </div>
+
+                            <div class="pt-3 flex flex-col gap-1">
+                                <span class="text-charcoalMuted uppercase text-[10px]">INDUSTRY</span>
+                                <span class="text-charcoal font-medium">Debt Recovery, Collections & Management</span>
+                            </div>
+
+                            <div class="pt-3 flex flex-col gap-1">
+                                <span class="text-charcoalMuted uppercase text-[10px]">HEAD OFFICE</span>
+                                <span class="text-charcoalMuted font-sans text-xs leading-relaxed">
+                                    D.No. 39-11-5, Sri Srinivasa Towers, AXIS Bank Upstairs, 4th Floor, Murali Nagar, Visakhapatnam – 530007
+                                </span>
+                            </div>
+
+                            <div class="pt-3 flex flex-col gap-1">
+                                <span class="text-charcoalMuted uppercase text-[10px]">CONTACT</span>
+                                <span class="text-charcoal font-sans text-xs font-semibold">S. Govinda Rao</span>
+                                <a href="tel:9290865555" class="text-amberGold font-bold hover:underline mt-0.5">+91 92908 65555</a>
+                                <a href="mailto:ssdenterprisesvizag@gmail.com" class="text-charcoalMuted hover:text-amberGold transition-colors text-[11px]">ssdenterprisesvizag@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: ABOUT US & LEGACY -->
+    <section id="about" class="py-20 relative z-10 border-t border-amberGold/15 bg-bgBright">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">ABOUT US & OUR LEGACY</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold text-charcoal">Two Decades of Trusted Recovery</h2>
+                <p class="italic text-charcoalMuted font-serif text-sm">Quality Collections & Debt Recovery for Banks and NBFCs</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-charcoalMuted leading-relaxed font-body text-sm sm:text-base">
+                <p>
+                    Our journey began under the name <strong class="text-charcoal font-semibold">SR Enterprises</strong>, which over the years grew to become a synonymous term across Andhra Pradesh for quality collection reporting for almost every leading NBFC and Bank. With experience dating back to <strong class="font-mono text-amberGold">2006</strong>, we deployed a workforce of around 100 executives managing portfolios of up to <strong class="font-mono text-amberGold">₹400 crores per month</strong> for the region's foremost financial institutions.
+                </p>
+                <p>
+                    After a brief, deliberate pause, we returned with renewed vigour as <strong class="text-charcoal font-semibold">SSD Enterprises</strong> — formally established in <strong class="font-mono text-amberGold">2021</strong>. Under the banner of Sri Sai Dhanada Enterprises, we carry forward the same standards that earned our reputation, combining seasoned leadership with a modern, technology-enabled recovery operation. Our guiding philosophy remains unchanged: <strong class="text-charcoal font-semibold">“Quality attracts Clients.”</strong>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div class="glass-card-light p-4 rounded text-left">
+                    <div class="font-mono text-2xl font-bold text-amberGold">2006</div>
+                    <div class="font-mono text-[11px] uppercase text-charcoalMuted font-medium mt-1">Experience Since</div>
+                </div>
+                <div class="glass-card-light p-4 rounded text-left">
+                    <div class="font-mono text-2xl font-bold text-amberGold">2021</div>
+                    <div class="font-mono text-[11px] uppercase text-charcoalMuted font-medium mt-1">SSD Established</div>
+                </div>
+                <div class="glass-card-light p-4 rounded text-left">
+                    <div class="font-mono text-2xl font-bold text-amberGold">₹400 Cr+</div>
+                    <div class="font-mono text-[11px] uppercase text-charcoalMuted font-medium mt-1">Monthly Portfolio</div>
+                </div>
+                <div class="glass-card-light p-4 rounded text-left">
+                    <div class="font-mono text-2xl font-bold text-amberGold">260+</div>
+                    <div class="font-mono text-[11px] uppercase text-charcoalMuted font-medium mt-1">Professionals</div>
+                </div>
+                <div class="glass-card-light p-4 rounded text-left">
+                    <div class="font-mono text-2xl font-bold text-amberGold">14+</div>
+                    <div class="font-mono text-[11px] uppercase text-charcoalMuted font-medium mt-1">Bank Partners</div>
+                </div>
+                <div class="glass-card-light p-4 rounded text-left">
+                    <div class="font-mono text-2xl font-bold text-amberGold">10</div>
+                    <div class="font-mono text-[11px] uppercase text-charcoalMuted font-medium mt-1">Branch Network</div>
+                </div>
+            </div>
+
+            <!-- National Partners List -->
+            <div class="glass-card-light p-8 rounded border border-amberGold/20 space-y-6">
+                <div class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">OUR NATIONAL FINANCIAL PARTNERS</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-body text-sm text-charcoal font-semibold">
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/icici.png" alt="ICICI Bank Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>ICICI Bank (All Products)</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/sbi.png" alt="SBI Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>State Bank of India</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/axis.png" alt="Axis Bank Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>Axis Bank</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/rbl.png" alt="RBL Bank Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>RBL & BRBL</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/idfc.png" alt="IDFC First Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>IDFC First Bank</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/home credit.png" alt="Home Credit Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>Home Credit</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/kinara.png" alt="Kinara Capital Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>Kinara Capital</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/lendingkart.png" alt="Lendingkart Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>Lendingkart</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/piramal.png" alt="Piramal Finance Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>Piramal Finance</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/navi.png" alt="Navi Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>Navi</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/tvs.png" alt="TVS Credit Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>TVS Credit</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
+                        <img src="logo/one card.png" alt="IARC Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <span>IARC & One Card</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: MANPOWER & HIERARCHY -->
+    <section class="py-20 relative z-10 border-t border-amberGold/15 bg-paperLight/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">MANPOWER & HIERARCHY</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal">A Disciplined Recovery Force</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">260+ professionals across field & tele-calling operations</p>
+                <p class="text-charcoalMuted text-sm leading-relaxed">
+                    Sri Sai Dhanada Enterprises has built a large and highly-disciplined recovery organisation, structured to execute on-field collections and tele-calling activities seamlessly. Team Leaders and Supervisors report directly to the Manager, ensuring real-time oversight, data integrity and immediate escalation handling.
+                </p>
+            </div>
+
+            <div class="glass-card-light p-8 rounded border border-amberGold/20 space-y-6">
+                <div class="font-mono text-xs text-center uppercase tracking-widest text-amberGold font-bold">ORGANISATIONAL HIERARCHY</div>
+                
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="bg-amberGold text-white p-4 rounded text-center font-bold font-mono text-sm uppercase shadow-md shadow-amberGold/20">
+                        Level 1: Proprietor / Management
+                    </div>
+                    <div class="w-0.5 h-4 bg-amberGold mx-auto"></div>
+
+                    <div class="glass-card-light border border-amberGold text-amberGold p-3 rounded text-center font-bold font-mono text-xs uppercase">
+                        Level 2: Operational Manager
+                    </div>
+                    <div class="w-0.5 h-4 bg-amberGold/40 mx-auto"></div>
+
+                    <div class="glass-card-light p-3 rounded text-center font-bold font-mono text-xs uppercase text-charcoal">
+                        Level 3: Manager
+                    </div>
+                    <div class="w-0.5 h-4 bg-amberGold/40 mx-auto"></div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-card-light p-3 rounded text-center font-mono text-xs text-charcoal font-semibold">
+                            Level 4: Team Leaders / Supervisors
+                        </div>
+                        <div class="glass-card-light p-3 rounded text-center font-mono text-xs text-charcoal font-semibold">
+                            Level 4: Team Leaders / Supervisors
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-surfaceWhite p-3 rounded border border-amberGold/20 text-charcoalMuted text-center font-mono text-xs">
+                            Level 5: Field Executives (100)
+                        </div>
+                        <div class="bg-surfaceWhite p-3 rounded border border-amberGold/20 text-charcoalMuted text-center font-mono text-xs">
+                            Level 5: Tele Callers (140)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="glass-card-light p-5 rounded">
+                    <div class="font-mono text-3xl font-bold text-amberGold">18</div>
+                    <div class="font-mono text-xs text-charcoalMuted uppercase font-semibold mt-1">Team Leaders</div>
+                </div>
+                <div class="glass-card-light p-5 rounded">
+                    <div class="font-mono text-3xl font-bold text-amberGold">06</div>
+                    <div class="font-mono text-xs text-charcoalMuted uppercase font-semibold mt-1">EDP / Front Office</div>
+                </div>
+                <div class="glass-card-light p-5 rounded">
+                    <div class="font-mono text-3xl font-bold text-amberGold">100</div>
+                    <div class="font-mono text-xs text-charcoalMuted uppercase font-semibold mt-1">Field Executives</div>
+                </div>
+                <div class="glass-card-light p-5 rounded">
+                    <div class="font-mono text-3xl font-bold text-amberGold">140</div>
+                    <div class="font-mono text-xs text-charcoalMuted uppercase font-semibold mt-1">Tele Callers</div>
+                </div>
+            </div>
+
+            <div class="flex justify-center items-center w-full my-8">
+                <img src="images/1.png" alt="Operations Floor" class="max-w-lg w-full h-auto rounded-lg border border-amberGold/20 shadow-md">
+            </div>
+        </div>                  
+    </section>
+
+    <!-- SECTION 5: BRANCH NETWORK -->
+    <section class="py-20 relative z-10 border-t border-amberGold/15 bg-bgBright">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            <div class="max-w-3xl space-y-2">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">OUR PEOPLE ON THE GROUND</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal">Teams Across Our Branch Network</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Trained recovery teams operating from ten locations in AP, Telangana & Odisha</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card-light rounded p-4 space-y-3">
+                    <img src="images/2.png" alt="Vijayawada Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <div class="font-heading font-bold text-charcoal text-base">1. Vijayawada</div>
+                </div>
+                <div class="glass-card-light rounded p-4 space-y-3">
+                    <img src="images/3.png" alt="Warangal Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <div class="font-heading font-bold text-charcoal text-base">2. Warangal</div>
+                </div>
+                <div class="glass-card-light rounded p-4 space-y-3">
+                    <img src="images/4.png" alt="Karimnagar Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <div class="font-heading font-bold text-charcoal text-base">3. Karimnagar</div>
+                </div>
+                <div class="glass-card-light rounded p-4 space-y-3">
+                    <img src="images/5.png" alt="Guntur Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <div class="font-heading font-bold text-charcoal text-base">4. Guntur</div>
+                </div>
+                <div class="glass-card-light rounded p-4 space-y-3">
+                    <img src="images/6.png" alt="Secunderabad Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <div class="font-heading font-bold text-charcoal text-base">5. Secunderabad</div>
+                </div>
+                <div class="glass-card-light rounded p-4 space-y-3">
+                    <img src="images/7.png" alt="Nellore Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <div class="font-heading font-bold text-charcoal text-base">6. Nellore</div>
+                </div>
+                <div class="glass-card-light rounded p-4 space-y-3">
+                    <img src="images/8.png" alt="Visakhapatnam Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <div class="font-heading font-bold text-charcoal text-base">7. Visakhapatnam - Madhavadhara</div>
+                </div>
+                <div class="glass-card-light rounded p-4 space-y-3">
+                    <img src="images/9.png" alt="Kadapa Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <div class="font-heading font-bold text-charcoal text-base">8. Kadapa</div>
+                </div>
+                <div class="glass-card-light rounded p-4 space-y-3">
+                    <img src="images/10.png" alt="Visakhapatnam II Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <div class="font-heading font-bold text-charcoal text-base">9. Visakhapatnam - Madhavadhara II</div>
+                </div>
+                <div class="glass-card-light rounded p-4 space-y-3">
+                    <img src="images/14.png" alt="Visakhapatnam II Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <div class="font-heading font-bold text-charcoal text-base">10. Bhubaneshwar - Odisha</div>
+                </div>
+            </div>
+
+            <p class="font-body text-xs text-charcoalMuted text-center italic">
+                A unified, standards-driven workforce of 260+ professionals — every branch trained to the same compliance, conduct and reporting protocols.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 6: CORE SERVICES -->
+    <section id="services" class="py-20 relative z-10 border-t border-amberGold/15 bg-paperLight/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">WHAT WE DO</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold text-charcoal">Our Core Services</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Specialists in field & tele-recovery and on-ground verification</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-block font-mono text-xs uppercase text-amberGold border border-amberGold/40 px-2.5 py-1 rounded font-bold">SERVICE 01</div>
+                    <h3 class="font-heading text-2xl sm:text-3xl font-bold text-charcoal">Collections & Debt Recovery</h3>
+                    <p class="text-charcoalMuted text-sm leading-relaxed">
+                        End-to-end receivables recovery for Banks & NBFCs across every delinquency stage — from early-bucket reminders through hardcore 180+ and written-off pools. Our blended model pairs a 140-seat tele-calling centre with 100+ trained field executives to deliver measurable, fully compliant resolution at scale.
+                    </p>
+
+                    <div class="space-y-2 font-body text-xs text-charcoal font-medium">
+                        <div class="flex items-center gap-2.5"><i class="fa-solid fa-check text-amberGold"></i> All products — Credit Cards, Personal, Business & Consumer-Durable loans</div>
+                        <div class="flex items-center gap-2.5"><i class="fa-solid fa-check text-amberGold"></i> Complete bucket coverage: X, 2, 3, 4, 5, 6 & 180+ DPD</div>
+                        <div class="flex items-center gap-2.5"><i class="fa-solid fa-check text-amberGold"></i> On-field collections + dedicated tele-calling centre</div>
+                        <div class="flex items-center gap-2.5"><i class="fa-solid fa-check text-amberGold"></i> Daily MIS, instant receipts & client-ready recovery reporting</div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="tag-amber-filled px-3 py-1 rounded text-xs">Bkt X</span>
+                        <span class="tag-amber-filled px-3 py-1 rounded text-xs">Bkt 2-3</span>
+                        <span class="tag-amber-filled px-3 py-1 rounded text-xs">Bkt 4-5</span>
+                        <span class="tag-amber-filled px-3 py-1 rounded text-xs">Bkt 6</span>
+                        <span class="bg-amberGold text-white font-mono font-bold px-3 py-1 rounded text-xs">180+ DPD</span>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <img src="images/10.png" alt="Tele-calling Floor" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy">
+                </div>
+            </div>
+
+            <hr class="border-amberGold/15">
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-block font-mono text-xs uppercase text-amberGold border border-amberGold/40 px-2.5 py-1 rounded font-bold">SERVICE 02</div>
+                    <h3 class="font-heading text-2xl sm:text-3xl font-bold text-charcoal">Verifications & Skip Tracing</h3>
+                    <p class="text-charcoalMuted text-sm leading-relaxed">
+                        Accurate on-ground verification and intelligence-led skip tracing to locate non-contactable and absconding customers. We combine physical field visits, tele-verification and privileged public-database access to re-establish contact and unlock stalled recoveries.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 font-body text-xs">
+                        <div class="p-3.5 rounded glass-card-light flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-amberGold text-white font-mono font-bold flex items-center justify-center text-xs shrink-0">1</span>
+                            <div>
+                                <strong class="text-charcoal block font-semibold">Physical & Tele Verification</strong>
+                                <span class="text-charcoalMuted text-[11px]">Residence & office address confirmation</span>
+                            </div>
+                        </div>
+                        <div class="p-3.5 rounded glass-card-light flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-amberGold text-white font-mono font-bold flex items-center justify-center text-xs shrink-0">2</span>
+                            <div>
+                                <strong class="text-charcoal block font-semibold">KYC Validation</strong>
+                                <span class="text-charcoalMuted text-[11px]">Identity, document & transaction checks</span>
+                            </div>
+                        </div>
+                        <div class="p-3.5 rounded glass-card-light flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-amberGold text-white font-mono font-bold flex items-center justify-center text-xs shrink-0">3</span>
+                            <div>
+                                <strong class="text-charcoal block font-semibold">Skip Tracing</strong>
+                                <span class="text-charcoalMuted text-[11px]">Social-engineering & public lookups</span>
+                            </div>
+                        </div>
+                        <div class="p-3.5 rounded glass-card-light flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-amberGold text-white font-mono font-bold flex items-center justify-center text-xs shrink-0">4</span>
+                            <div>
+                                <strong class="text-charcoal block font-semibold">Trace Report</strong>
+                                <span class="text-charcoalMuted text-[11px]">Verified location handed to recovery team</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <img src="images/11.png" alt="Field Fleet" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: OPERATIONS & FRAMEWORK -->
+    <section id="operations" class="py-20 relative z-10 border-t border-amberGold/15 bg-bgBright">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">OPERATIONS & FRAMEWORK</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal">Structured Job Responsibilities</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Seamless workflows across specialised departments</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card-light tilt-card p-6 rounded space-y-4">
+                    <div class="font-heading font-bold text-charcoal text-lg border-b border-amberGold/20 pb-2">Front Office</div>
+                    <ul class="space-y-2 text-xs text-charcoalMuted font-body font-medium">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Personnel activities of field executives</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Grooming the field executives</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Customer support & resolution</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Recruiting & training field staff</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card-light tilt-card p-6 rounded space-y-4">
+                    <div class="font-heading font-bold text-charcoal text-lg border-b border-amberGold/20 pb-2">Back Office</div>
+                    <ul class="space-y-2 text-xs text-charcoalMuted font-body font-medium">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Instructing the supervisors</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Checking EDP department work</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Maintaining recovery targets</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Signatory authority of all receipts</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Controlling the tele-calling process</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Skip tracing using modern technology</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card-light tilt-card p-6 rounded space-y-4">
+                    <div class="font-heading font-bold text-charcoal text-lg border-b border-amberGold/20 pb-2">EDP Department</div>
+                    <ul class="space-y-2 text-xs text-charcoalMuted font-body font-medium">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Mail downloads</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Report generation</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Electronic liaison with clients</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-amberGold text-[10px] mt-1"></i> Real-time data integrity checks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="glass-card-light p-6 rounded border border-amberGold/20 space-y-4">
+                <div class="font-mono text-xs uppercase text-amberGold font-bold tracking-widest text-center">RECOVERY WORKFLOW LIFECYCLE</div>
+                <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 text-center font-mono text-xs">
+                    <div class="p-3 bg-surfaceWhite rounded border border-amberGold/20"><span class="text-amberGold font-bold block mb-1">01</span><span class="text-charcoal font-medium">Portfolio Allocation</span></div>
+                    <div class="p-3 bg-surfaceWhite rounded border border-amberGold/20"><span class="text-amberGold font-bold block mb-1">02</span><span class="text-charcoal font-medium">Tele-calling & Skip Trace</span></div>
+                    <div class="p-3 bg-surfaceWhite rounded border border-amberGold/20"><span class="text-amberGold font-bold block mb-1">03</span><span class="text-charcoal font-medium">Field Visit</span></div>
+                    <div class="p-3 bg-surfaceWhite rounded border border-amberGold/20"><span class="text-amberGold font-bold block mb-1">04</span><span class="text-charcoal font-medium">Collection & Receipt</span></div>
+                    <div class="p-3 bg-surfaceWhite rounded border border-amberGold/20"><span class="text-amberGold font-bold block mb-1">05</span><span class="text-charcoal font-medium">Reporting to Client</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: INFRASTRUCTURE -->
+    <section class="py-20 relative z-10 border-t border-amberGold/15 bg-paperLight/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">OPERATIONAL ASSETS</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal">Advanced Infrastructure</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Capital-heavy facilities & high-capacity workspaces</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div class="glass-card-light p-5 rounded text-center space-y-2">
+                    <i class="fa-solid fa-user-group text-amberGold text-2xl"></i>
+                    <div class="font-mono text-xl font-bold text-charcoal">100</div>
+                    <div class="font-mono text-[11px] text-charcoalMuted uppercase font-semibold">Field Executives</div>
+                </div>
+                <div class="glass-card-light p-5 rounded text-center space-y-2">
+                    <i class="fa-solid fa-motorcycle text-amberGold text-2xl"></i>
+                    <div class="font-mono text-xl font-bold text-charcoal">Fleet</div>
+                    <div class="font-mono text-[11px] text-charcoalMuted uppercase font-semibold">Two-Wheelers</div>
+                </div>
+                <div class="glass-card-light p-5 rounded text-center space-y-2">
+                    <i class="fa-solid fa-phone text-amberGold text-2xl"></i>
+                    <div class="font-mono text-xl font-bold text-charcoal">08</div>
+                    <div class="font-mono text-[11px] text-charcoalMuted uppercase font-semibold">Landlines</div>
+                </div>
+                <div class="glass-card-light p-5 rounded text-center space-y-2">
+                    <i class="fa-solid fa-desktop text-amberGold text-2xl"></i>
+                    <div class="font-mono text-xl font-bold text-charcoal">160</div>
+                    <div class="font-mono text-[11px] text-charcoalMuted uppercase font-semibold">Computers</div>
+                </div>
+                <div class="glass-card-light p-5 rounded text-center space-y-2">
+                    <i class="fa-solid fa-headset text-amberGold text-2xl"></i>
+                    <div class="font-mono text-xl font-bold text-charcoal">140</div>
+                    <div class="font-mono text-[11px] text-charcoalMuted uppercase font-semibold">Tele Stations</div>
+                </div>
+            </div>
+
+            <div class="glass-card-light border-l-4 border-amberGold p-6 rounded space-y-1">
+                <p class="font-mono text-sm text-charcoal">
+                    Capacity to handle <strong class="text-amberGold font-bold">15 lakh+ outbound calls per month</strong>, supported by primary-rate (PRI) interface lines and proprietary collection-tracking software.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <img src="images/12.png" alt="Tele operations" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy">
+                <img src="images/13.png" alt="Infra details" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: CLIENT PORTFOLIO -->
+    <section id="portfolio" class="py-20 relative z-10 border-t border-amberGold/15 bg-bgBright">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">CLIENT PORTFOLIO</span>
+                <h2 class="font-heading text-3xl sm:text-5xl font-bold text-charcoal">Anchored by ICICI Bank</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Comprehensive operations across all products</p>
+            </div>
+
+            <div class="glass-card-light border-2 border-amberGold p-8 rounded space-y-6 text-charcoal">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <span class="bg-amberGold text-white font-mono font-bold text-xs uppercase px-3 py-1 rounded">FLAGSHIP CLIENT</span>
+                    <span class="font-mono text-xs text-amberGold font-bold">Full AP + TG Jurisdiction</span>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="font-heading text-3xl font-bold text-charcoal">ICICI Bank — All Products</h3>
+                    <p class="text-sm text-charcoalMuted leading-relaxed max-w-3xl">
+                        We manage multiple loan portfolios and DPD buckets for ICICI Bank — Credit Cards, Business Loans, Personal Loans and Consumer Durable loans — deployed across all territories of Andhra Pradesh, Telangana & Odisha.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 font-mono text-xs">
+                    <div class="bg-surfaceWhite p-3 rounded border border-amberGold/30 shadow-sm">
+                        <span class="text-charcoalMuted text-[10px] block font-semibold">CREDIT CARDS POOL</span>
+                        <span class="text-amberGold font-bold text-base">₹45 Cr</span>
+                    </div>
+
+                    <div class="bg-surfaceWhite p-3 rounded border border-amberGold/30 shadow-sm">
+                        <span class="text-charcoalMuted text-[10px] block font-semibold">BUCKET COVERAGE</span>
+                        <span class="text-charcoal font-bold text-base">Bkt X-6</span>
+                    </div>
+
+                    <div class="bg-surfaceWhite p-3 rounded border border-amberGold/30 shadow-sm">
+                        <span class="text-charcoalMuted text-[10px] block font-semibold">PL 180+ POOL</span>
+                        <span class="text-amberGold font-bold text-base">₹5 Cr</span>
+                    </div>
+
+                    <div class="bg-surfaceWhite p-3 rounded border border-amberGold/30 shadow-sm">
+                        <span class="text-charcoalMuted text-[10px] block font-semibold">REGIONAL COVERAGE</span>
+                        <span class="text-charcoal font-bold text-base">AP + TG</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="font-heading text-xl font-bold text-charcoal">Private Bank & NBFC Pools</h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-card-light tilt-card p-6 rounded space-y-3">
+                        <div class="flex items-center justify-between font-mono text-s text-charcoalMuted font-semibold">
+                            <span>Axis Bank</span>
+                            <span class="text-amberGold font-bold">Credit Cards · PL · BL</span>
+                        </div>
+                        <div class="font-mono text-2xl font-bold text-amberGold">₹14 Cr</div>
+                        <div class="font-mono text-[11px] text-charcoalMuted">X Bucket · 180+ · Overall AP</div>
+                    </div>
+
+                    <div class="glass-card-light tilt-card p-6 rounded space-y-3">
+                        <div class="flex items-center justify-between font-mono text-s text-charcoalMuted font-semibold">
+                            <span>Lendingkart</span>
+                            <span class="text-amberGold font-bold">Business Loans</span>
+                        </div>
+                        <div class="font-mono text-2xl font-bold text-amberGold">₹14 Cr</div>
+                        <div class="font-mono text-[11px] text-charcoalMuted">30 & 180+ DPD · Overall Andhra Pradesh</div>
+                    </div>
+                    
+                    <div class="glass-card-light tilt-card p-6 rounded space-y-3">
+                        <div class="flex items-center justify-between font-mono text-s text-charcoalMuted font-semibold">
+                            <span>BRBL Bank</span>
+                            <span class="text-amberGold font-bold">Credit Cards</span>
+                        </div>
+                        <div class="font-mono text-2xl font-bold text-amberGold">₹10 Cr</div>
+                        <div class="font-mono text-[11px] text-charcoalMuted">Bkt 2, 4, 5, 6 · Vijayawada · Vizag · Guntur</div>
+                    </div>
+                    
+                    <div class="glass-card-light tilt-card p-6 rounded space-y-3">
+                        <div class="flex items-center justify-between font-mono text-s text-charcoalMuted font-semibold">
+                            <span>Kinara Capital</span>
+                            <span class="text-amberGold font-bold">Business Loans</span>
+                        </div>
+                        <div class="font-mono text-2xl font-bold text-amberGold">₹10 Cr</div>
+                        <div class="font-mono text-[11px] text-charcoalMuted">Overall Andhra Pradesh</div>
+                    </div>
+
+                    <div class="glass-card-light tilt-card p-6 rounded space-y-3">
+                        <div class="flex items-center justify-between font-mono text-s text-charcoalMuted font-semibold">
+                            <span>IDFC First — Guntur</span>
+                            <span class="text-amberGold font-bold">PL Cross-Sell</span>
+                        </div>
+                        <div class="font-mono text-2xl font-bold text-amberGold">₹9 Cr</div>
+                        <div class="font-mono text-[11px] text-charcoalMuted">X Bucket · 1,200 active cases · Guntur</div>
+                    </div>
+                    
+                    <div class="glass-card-light tilt-card p-6 rounded space-y-3">
+                        <div class="flex items-center justify-between font-mono text-s text-charcoalMuted font-semibold">
+                            <span>RBL Bank</span>
+                            <span class="text-amberGold font-bold">Credit Cards</span>
+                        </div>
+                        <div class="font-mono text-2xl font-bold text-amberGold">₹7.5 Cr</div>
+                        <div class="font-mono text-[11px] text-charcoalMuted">Bkt 2, 4, 5, 6 · Vijayawada · Vizag · Guntur</div>
+                    </div>
+
+                    <div class="glass-card-light tilt-card p-6 rounded space-y-3">
+                        <div class="flex items-center justify-between font-mono text-s text-charcoalMuted font-semibold">
+                            <span>IDFC First — Vizag</span>
+                            <span class="text-amberGold font-bold">PL Cross-Sell</span>
+                        </div>
+                        <div class="font-mono text-2xl font-bold text-amberGold">₹2 Cr</div>
+                        <div class="font-mono text-[11px] text-charcoalMuted">X Bucket · 300 active cases · Visakhapatnam</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: RECOVERY STATISTICS TABLE -->
+    <section class="py-20 relative z-10 border-t border-amberGold/15 bg-paperLight/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">PORTFOLIO MANAGEMENT</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal">Recovery Statistics at a Glance</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Active pools & case volumes across our partner network</p>
+            </div>
+
+            <div class="overflow-x-auto glass-card-light rounded">
+                <table class="w-full text-left font-body text-xs sm:text-sm text-charcoal divide-y divide-amberGold/15">
+                    <thead class="bg-paperLight font-mono text-[11px] uppercase text-amberGold font-bold tracking-wider">
+                        <tr>
+                            <th scope="col" class="py-3.5 px-4">Client</th>
+                            <th scope="col" class="py-3.5 px-4">Segment</th>
+                            <th scope="col" class="py-3.5 px-4">Bucket / DPD</th>
+                            <th scope="col" class="py-3.5 px-4">Approx. Pool</th>
+                            <th scope="col" class="py-3.5 px-4">Coverage</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-amberGold/10 font-mono text-xs">
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">ICICI Bank</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Credit Cards</td>
+                            <td class="py-3 px-4">Bkt X, 2, 3, 4, 5, 6</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹45 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">AP & Telangana</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">ICICI Bank</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Business / Personal / CD Loans</td>
+                            <td class="py-3 px-4">Bkt X · 180+</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹7 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">AP & Telangana</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">BRBL Bank</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Credit Cards</td>
+                            <td class="py-3 px-4">Bkt 2, 4, 5, 6</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹10 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">VJA · Vizag · Guntur</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">RBL Bank</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Credit Cards</td>
+                            <td class="py-3 px-4">Bkt 2, 4, 5, 6</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹7.5 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">VJA · Vizag · Guntur</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">SBI</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Consumer Durable · 180+</td>
+                            <td class="py-3 px-4">CD2 · 180+</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹16 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">Overall AP</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">Lendingkart</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Business Loans</td>
+                            <td class="py-3 px-4">30 & 180+ DPD</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹14 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">Overall AP</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">Axis Bank</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Credit Cards · PL · BL</td>
+                            <td class="py-3 px-4">Bkt X · 180+</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹14 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">Overall AP</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">IDFC First Bank</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">PL Cross-Sell</td>
+                            <td class="py-3 px-4">X Bucket</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹11 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">Guntur · Vizag · Bhubaneshwar</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">Kinara Capital</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Business Loans</td>
+                            <td class="py-3 px-4">Mixed</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹10 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">Overall AP</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">Piramal Finance</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Personal Loans</td>
+                            <td class="py-3 px-4">Bkt 2, 4</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹8 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">~240 cases</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">TVS Credit</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Personal Loans</td>
+                            <td class="py-3 px-4">Bkt 4, 5, 6 & 180+</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹8 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">~1,800 cases</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">Navi</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Personal Loans</td>
+                            <td class="py-3 px-4">30 – 180+ DPD</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹7 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">~900 cases</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">IARC</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Personal Loans</td>
+                            <td class="py-3 px-4">180+ DPD</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹7 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">~2,000 cases</td>
+                        </tr>
+                        <tr class="hover:bg-amberGold/5 transition-colors">
+                            <td class="py-3 px-4 font-bold text-charcoal">Home Credit</td>
+                            <td class="py-3 px-4 text-charcoalMuted font-sans font-medium">Business Loans</td>
+                            <td class="py-3 px-4">180+</td>
+                            <td class="py-3 px-4 text-amberGold font-bold">₹5 Cr</td>
+                            <td class="py-3 px-4 text-charcoalMuted">Visakhapatnam</td>
+                        </tr>
+                        <tr class="bg-amberGold/10 font-bold border-t-2 border-amberGold text-charcoal">
+                            <td class="py-4 px-4 font-heading text-sm uppercase" colspan="3">TOTAL ACTIVE PORTFOLIO UNDER MANAGEMENT</td>
+                            <td class="py-4 px-4 text-amberGold text-base">₹160 Cr+</td>
+                            <td class="py-4 px-4 text-amberGold">AP, Telangana & Odisha</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="font-mono text-[11px] text-charcoalMuted italic">
+                Figures represent approximate live pool sizes across active mandates and are subject to monthly allocation. Our infrastructure scales to absorb additional portfolios on short notice.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 11: COMPLIANCE & ETHICS -->
+    <section id="compliance" class="py-20 relative z-10 border-t border-amberGold/15 bg-bgBright">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">COMPLIANCE & ETHICS</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal">A Zero-Tolerance Culture</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">RBI-aligned conduct, data security & fair-practice discipline</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-7 space-y-3 font-body text-xs">
+                    <div class="p-3.5 glass-card-light border-l-4 border-terracotta rounded flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-terracotta/10 text-terracotta font-mono font-bold flex items-center justify-center text-[11px] shrink-0">01</span>
+                            <i class="fa-solid fa-user-slash text-terracotta text-sm shrink-0"></i>
+                            <span class="text-charcoal font-semibold">Sharing customer information with third parties</span>
+                        </div>
+                    </div>
+                    <div class="p-3.5 glass-card-light border-l-4 border-terracotta rounded flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-terracotta/10 text-terracotta font-mono font-bold flex items-center justify-center text-[11px] shrink-0">02</span>
+                            <i class="fa-solid fa-comment-slash text-terracotta text-sm shrink-0"></i>
+                            <span class="text-charcoal font-semibold">Unprofessional or threatening language on calls</span>
+                        </div>
+                    </div>
+                    <div class="p-3.5 glass-card-light border-l-4 border-terracotta rounded flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-terracotta/10 text-terracotta font-mono font-bold flex items-center justify-center text-[11px] shrink-0">03</span>
+                            <i class="fa-solid fa-phone-slash text-terracotta text-sm shrink-0"></i>
+                            <span class="text-charcoal font-semibold">Calling from unauthorised / non-recorded lines</span>
+                        </div>
+                    </div>
+                    <div class="p-3.5 glass-card-light border-l-4 border-terracotta rounded flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-terracotta/10 text-terracotta font-mono font-bold flex items-center justify-center text-[11px] shrink-0">04</span>
+                            <i class="fa-solid fa-mobile-slash text-terracotta text-sm shrink-0"></i>
+                            <span class="text-charcoal font-semibold">Mobile phones on the calling floor</span>
+                        </div>
+                    </div>
+                    <div class="p-3.5 glass-card-light border-l-4 border-terracotta rounded flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-terracotta/10 text-terracotta font-mono font-bold flex items-center justify-center text-[11px] shrink-0">05</span>
+                            <i class="fa-solid fa-key text-terracotta text-sm shrink-0"></i>
+                            <span class="text-charcoal font-semibold">Disclosure of customer IDs or passwords</span>
+                        </div>
+                    </div>
+                    <div class="p-3.5 glass-card-light border-l-4 border-terracotta rounded flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-terracotta/10 text-terracotta font-mono font-bold flex items-center justify-center text-[11px] shrink-0">06</span>
+                            <i class="fa-solid fa-comments text-terracotta text-sm shrink-0"></i>
+                            <span class="text-charcoal font-semibold">Communicating via personal social media / messenger</span>
+                        </div>
+                    </div>
+                    <div class="p-3.5 glass-card-light border-l-4 border-terracotta rounded flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-terracotta/10 text-terracotta font-mono font-bold flex items-center justify-center text-[11px] shrink-0">07</span>
+                            <i class="fa-solid fa-unlock-keyhole text-terracotta text-sm shrink-0"></i>
+                            <span class="text-charcoal font-semibold">Data sharing without password protection</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-amberGold text-white p-6 rounded text-center space-y-2 shadow-xl shadow-amberGold/20">
+                        <div class="font-heading font-extrabold text-2xl uppercase">ZERO TOLERANCE</div>
+                        <div class="font-mono text-[10px] tracking-widest font-bold border-t border-white/30 pt-2">
+                            DATA SECURITY · FAIR PRACTICE · INTEGRITY
+                        </div>
+                    </div>
+
+                    <div class="glass-card-light p-6 rounded space-y-2">
+                        <div class="font-heading font-bold text-charcoal text-base">Proven KYC Track Record</div>
+                        <p class="text-charcoalMuted text-xs leading-relaxed font-body">
+                            Established KYC-verification experience for <strong class="text-charcoal font-semibold">leading Banks & NBFCs</strong> — enabling our clients to accurately identify, verify and monitor customers and related transactions with full confidence and compliance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-card-light p-4 rounded text-center space-y-1">
+                    <i class="fa-solid fa-shield-halved text-amberGold text-xl"></i>
+                    <div class="font-mono text-xs font-bold text-charcoal">RBI Fair Practices Code</div>
+                    <div class="font-mono text-[10px] text-charcoalMuted uppercase font-semibold">Fully Adhered</div>
+                </div>
+                <div class="glass-card-light p-4 rounded text-center space-y-1">
+                    <i class="fa-solid fa-microphone text-amberGold text-xl"></i>
+                    <div class="font-mono text-xs font-bold text-charcoal">100% Recorded Lines</div>
+                    <div class="font-mono text-[10px] text-charcoalMuted uppercase font-semibold">Every Call Logged</div>
+                </div>
+                <div class="glass-card-light p-4 rounded text-center space-y-1">
+                    <i class="fa-solid fa-lock text-amberGold text-xl"></i>
+                    <div class="font-mono text-xs font-bold text-charcoal">Data Confidentiality</div>
+                    <div class="font-mono text-[10px] text-charcoalMuted uppercase font-semibold">Secured & Encrypted</div>
+                </div>
+                <div class="glass-card-light p-4 rounded text-center space-y-1">
+                    <i class="fa-solid fa-file-invoice text-amberGold text-xl"></i>
+                    <div class="font-mono text-xs font-bold text-charcoal">Audit-Ready MIS</div>
+                    <div class="font-mono text-[10px] text-charcoalMuted uppercase font-semibold">Transparent Reporting</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 12: WHY CHOOSE US -->
+    <section class="py-20 relative z-10 border-t border-amberGold/15 bg-paperLight/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">WHY CHOOSE US</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal">Unmatched Experience & Credibility</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Built on trust, professional systems & field-tested experience</p>
+            </div>
+
+            <div class="space-y-3 font-body text-xs sm:text-sm text-charcoal">
+                <div class="glass-card-light p-4 rounded flex items-start gap-4">
+                    <span class="w-8 h-8 rounded-full bg-amberGold text-white font-mono font-bold flex items-center justify-center text-sm shrink-0">A</span>
+                    <p class="pt-1"><strong class="text-charcoal font-semibold">Led by a veteran</strong> with solid, successful experience in debt recovery and management.</p>
+                </div>
+                <div class="glass-card-light p-4 rounded flex items-start gap-4">
+                    <span class="w-8 h-8 rounded-full bg-amberGold text-white font-mono font-bold flex items-center justify-center text-sm shrink-0">B</span>
+                    <p class="pt-1"><strong class="text-charcoal font-semibold">Equipped with infrastructure</strong> to handle projects of any scale confidently.</p>
+                </div>
+                <div class="glass-card-light p-4 rounded flex items-start gap-4">
+                    <span class="w-8 h-8 rounded-full bg-amberGold text-white font-mono font-bold flex items-center justify-center text-sm shrink-0">C</span>
+                    <p class="pt-1"><strong class="text-charcoal font-semibold">Trained, talented & committed</strong> administrative and field staff at every level.</p>
+                </div>
+                <div class="glass-card-light p-4 rounded flex items-start gap-4">
+                    <span class="w-8 h-8 rounded-full bg-amberGold text-white font-mono font-bold flex items-center justify-center text-sm shrink-0">D</span>
+                    <p class="pt-1"><strong class="text-charcoal font-semibold">Thorough compliance knowledge</strong> of all legal, RBI and standard debt-recovery regulations.</p>
+                </div>
+                <div class="glass-card-light p-4 rounded flex items-start gap-4">
+                    <span class="w-8 h-8 rounded-full bg-amberGold text-white font-mono font-bold flex items-center justify-center text-sm shrink-0">E</span>
+                    <p class="pt-1"><strong class="text-charcoal font-semibold">Professional & transparent</strong> — operated in an extremely systematic and fully transparent manner.</p>
+                </div>
+                <div class="glass-card-light p-4 rounded flex items-start gap-4">
+                    <span class="w-8 h-8 rounded-full bg-amberGold text-white font-mono font-bold flex items-center justify-center text-sm shrink-0">F</span>
+                    <p class="pt-1"><strong class="text-charcoal font-semibold">Deep risk & debt expertise</strong>, with active interaction alongside well-branded banking professionals.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+                <div class="glass-card-light p-6 rounded text-center">
+                    <div class="font-mono text-3xl font-bold text-amberGold">20 yrs</div>
+                    <div class="font-mono text-xs text-charcoalMuted uppercase font-semibold mt-1">Field Experience</div>
+                </div>
+                <div class="glass-card-light p-6 rounded text-center">
+                    <div class="font-mono text-3xl font-bold text-amberGold">14+</div>
+                    <div class="font-mono text-xs text-charcoalMuted uppercase font-semibold mt-1">Bank & NBFC Mandates</div>
+                </div>
+                <div class="glass-card-light p-6 rounded text-center">
+                    <div class="font-mono text-3xl font-bold text-amberGold">11</div>
+                    <div class="font-mono text-xs text-charcoalMuted uppercase font-semibold mt-1">Manager References</div>
+                </div>
+                <div class="glass-card-light p-6 rounded text-center">
+                    <div class="font-mono text-3xl font-bold text-amberGold">100%</div>
+                    <div class="font-mono text-xs text-charcoalMuted uppercase font-semibold mt-1">RBI-Compliant</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 13: MANAGER REFERENCES -->
+    <section id="references" class="py-20 relative z-10 border-t border-amberGold/15 bg-bgBright">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">REFERENCES & CREDIBILITY</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal">Manager References</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Verifiable references from our partner banks & NBFCs</p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 font-mono text-xs">
+                <button class="ref-filter-btn px-4 py-2 rounded bg-amberGold text-white font-bold" data-filter="all">All Banks</button>
+                <button class="ref-filter-btn px-4 py-2 rounded glass-card-light text-charcoalMuted hover:text-amberGold font-medium" data-filter="icici">ICICI Bank</button>
+                <button class="ref-filter-btn px-4 py-2 rounded glass-card-light text-charcoalMuted hover:text-amberGold font-medium" data-filter="axis">Axis Bank</button>
+                <button class="ref-filter-btn px-4 py-2 rounded glass-card-light text-charcoalMuted hover:text-amberGold font-medium" data-filter="rbl">RBL Bank</button>
+                <button class="ref-filter-btn px-4 py-2 rounded glass-card-light text-charcoalMuted hover:text-amberGold font-medium" data-filter="navi">Navi</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="referenceGrid">
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="icici">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">ICICI BANK</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Madhu Babu</div>
+                    <div class="font-mono text-xs text-charcoalMuted">ICICI Bank · Manager</div>
+                </div>
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="icici">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">ICICI BANK</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Sai</div>
+                    <div class="font-mono text-xs text-charcoalMuted">ICICI Bank · Manager</div>
+                </div>
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="icici">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">ICICI BANK</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Ramanathan</div>
+                    <div class="font-mono text-xs text-charcoalMuted">ICICI Bank · Manager</div>
+                </div>
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="icici">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">ICICI BANK</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Althaf</div>
+                    <div class="font-mono text-xs text-charcoalMuted">ICICI Bank · Manager</div>
+                </div>
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="axis">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">AXIS BANK</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Lokesh</div>
+                    <div class="font-mono text-xs text-charcoalMuted">Axis Bank · Manager</div>
+                </div>
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="axis">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">AXIS BANK</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Hari Krishna</div>
+                    <div class="font-mono text-xs text-charcoalMuted">Axis Bank · Manager</div>
+                </div>
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="axis">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">AXIS BANK</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Geetha</div>
+                    <div class="font-mono text-xs text-charcoalMuted">Axis Bank · Manager</div>
+                </div>
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="axis">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">AXIS BANK</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Balasubbaraju</div>
+                    <div class="font-mono text-xs text-charcoalMuted">Axis Bank · Manager</div>
+                </div>
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="rbl">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">RBL BANK</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Shivaji</div>
+                    <div class="font-mono text-xs text-charcoalMuted">RBL · Manager</div>
+                </div>
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="rbl">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">RBL BANK</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Uday</div>
+                    <div class="font-mono text-xs text-charcoalMuted">RBL · Manager</div>
+                </div>
+                <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="navi">
+                    <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">NAVI</span>
+                    <div class="font-heading font-bold text-charcoal text-base">Ashok</div>
+                    <div class="font-mono text-xs text-charcoalMuted">Navi · Manager</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 14: LOCATIONS & CONTACT -->
+    <section id="contact" class="py-20 relative z-10 border-t border-amberGold/15 bg-paperLight/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">NETWORK PRESENCE & CONTACTS</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal">Head Office & Regional Network</h2>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Visakhapatnam HQ & nine regional branches across AP, Telangana & Odisha</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <div class="lg:col-span-6 space-y-8">
+                    <div class="glass-card-light p-6 rounded space-y-4">
+                        <div class="font-mono text-xs text-amberGold uppercase font-bold tracking-wider">HEAD OFFICE — VISAKHAPATNAM</div>
+                        <h3 class="font-heading text-2xl font-bold text-charcoal">Visakhapatnam</h3>
+                        <p class="font-body text-xs text-charcoalMuted leading-relaxed font-medium">
+                            D.No. 39-11-5, Sri Srinivasa Towers, AXIS Bank Upstairs, 4th Floor, Murali Nagar, Visakhapatnam – 530007
+                        </p>
+                        <div class="pt-2 border-t border-amberGold/15 font-mono text-xs space-y-1">
+                            <div><strong class="text-charcoal">Contact:</strong> S. Govinda Rao</div>
+                            <div><strong class="text-charcoal">Mobile:</strong> <a href="tel:9290865555" class="text-amberGold font-bold hover:underline">92908 65555</a></div>
+                            <div><strong class="text-charcoal">Email:</strong> <a href="mailto:ssdenterprisesvizag@gmail.com" class="text-charcoalMuted hover:underline">ssdenterprisesvizag@gmail.com</a></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="font-mono text-xs uppercase text-charcoalMuted font-bold tracking-wider">REGIONAL BRANCHES</div>
+                        <div class="grid grid-cols-2 gap-2 font-mono text-xs">
+                            <div class="p-2.5 glass-card-light rounded text-charcoal font-semibold"><strong>Vijayawada</strong></div>
+                            <div class="p-2.5 glass-card-light rounded text-charcoal font-semibold"><strong>Warangal</strong></div>
+                            <div class="p-2.5 glass-card-light rounded text-charcoal font-semibold"><strong>Karimnagar</strong></div>
+                            <div class="p-2.5 glass-card-light rounded text-charcoal font-semibold"><strong>Guntur</strong></div>
+                            <div class="p-2.5 glass-card-light rounded text-charcoal font-semibold"><strong>Secunderabad</strong></div>
+                            <div class="p-2.5 glass-card-light rounded text-charcoal font-semibold"><strong>Nellore</strong></div>
+                            <div class="p-2.5 glass-card-light rounded text-charcoal font-semibold"><strong>Kadapa</strong></div>
+                            <div class="p-2.5 glass-card-light rounded text-charcoal font-semibold"><strong>Madhavadhara II</strong></div>
+                            <div class="p-2.5 glass-card-light rounded text-charcoal font-semibold"><strong>Bhubaneshwar</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <div class="glass-card-light p-8 rounded space-y-6">
+                        <div>
+                            <span class="font-mono text-xs text-amberGold uppercase font-bold tracking-wider">PORTFOLIO ENQUIRY FORM</span>
+                            <h3 class="font-heading text-2xl font-bold text-charcoal mt-1">Initiate Agency Empanelment</h3>
+                        </div>
+
+                        <form id="enquiryForm" class="space-y-4 font-mono text-xs">
+                            <div>
+                                <label class="block text-charcoalMuted uppercase text-[10px] mb-1 font-semibold">Your Name *</label>
+                                <input type="text" required placeholder="Manager Name" class="w-full bg-surfaceWhite border border-amberGold/20 rounded px-3 py-2 text-charcoal placeholder-slate-400 focus:outline-none focus:border-amberGold">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-charcoalMuted uppercase text-[10px] mb-1 font-semibold">Company / Bank *</label>
+                                    <input type="text" required placeholder="Institution Name" class="w-full bg-surfaceWhite border border-amberGold/20 rounded px-3 py-2 text-charcoal placeholder-slate-400 focus:outline-none focus:border-amberGold">
+                                </div>
+                                <div>
+                                    <label class="block text-charcoalMuted uppercase text-[10px] mb-1 font-semibold">Phone Number *</label>
+                                    <input type="tel" required placeholder="+91 00000 00000" class="w-full bg-surfaceWhite border border-amberGold/20 rounded px-3 py-2 text-charcoal placeholder-slate-400 focus:outline-none focus:border-amberGold">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-charcoalMuted uppercase text-[10px] mb-1 font-semibold">Email Address *</label>
+                                <input type="email" required placeholder="manager@bank.com" class="w-full bg-surfaceWhite border border-amberGold/20 rounded px-3 py-2 text-charcoal placeholder-slate-400 focus:outline-none focus:border-amberGold">
+                            </div>
+
+                            <div>
+                                <label class="block text-charcoalMuted uppercase text-[10px] mb-1 font-semibold">Message / Portfolio Requirements</label>
+                                <textarea rows="4" placeholder="Briefly describe bucket requirements or meeting schedule..." class="w-full bg-surfaceWhite border border-amberGold/20 rounded px-3 py-2 text-charcoal placeholder-slate-400 focus:outline-none focus:border-amberGold"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded font-mono font-bold text-xs uppercase tracking-wider bg-amberGold text-white hover:bg-charcoal transition-all shadow-lg shadow-amberGold/20 flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-base text-white"></i>
+                                <span>Send Enquiry via WhatsApp</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer py-12 font-mono text-xs relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 site-footer-border">
+                <div>
+                    <div class="font-heading font-bold text-white text-lg tracking-tight">SRI SAI DHANADA ENTERPRISES</div>
+                    <div class="text-[11px] text-amberGold uppercase mt-0.5">Debt Recovery Agency & Management</div>
+                </div>
+
+                <div class="flex flex-wrap gap-6 site-footer-links">
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#compliance">Compliance</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[11px] site-footer-text">
+                <p>© 2026 Sri Sai Dhanada Enterprises. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <span>•</span>
+                    <span class="text-amberGold font-semibold">RBI Fair Practices Code Compliant</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Larger Translucent Pop-up Card -->
+    <div id="globalLogoTooltip" class="fixed hidden z-50 w-80 p-5 glass-popup-translucent text-white rounded-2xl border border-amberGold/40 pointer-events-none transition-all duration-150"></div>
+
+    <!-- External Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>

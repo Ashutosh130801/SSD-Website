@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions | Sri Sai Dhanada Enterprises</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Lenis Smooth Scroll CDN -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+    <!-- Tailwind Config Script -->
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    bgBright: '#050B1A',
+                    paperLight: '#0A142F',
+                    surfaceWhite: '#0F1C3F',
+                    charcoal: '#F8FAFC',
+                    charcoalMuted: '#94A3B8',
+                    amberGold: '#E2B13C',
+                    terracotta: '#38BDF8',
+                    warmBorder: 'rgba(226, 177, 60, 0.25)',
+                },
+                fontFamily: {
+                    heading: ['Space Grotesk', 'sans-serif'],
+                    body: ['Inter', 'sans-serif'],
+                    mono: ['IBM Plex Mono', 'monospace'],
+                }
+            }
+        }
+    }
+</script>
+
+    <!-- External Shared Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="antialiased selection:bg-amberGold selection:text-white relative">
+
+    <!-- LEFT FULL-HEIGHT VERTICAL BANNER -->
+    <aside class="fixed left-0 top-0 bottom-0 z-30 hidden md:flex flex-col w-16 lg:w-20 marquee-banner-pillar-full border-r border-amberGold/25 overflow-hidden pointer-events-auto">
+        <div class="relative flex-1 overflow-hidden vertical-marquee-mask my-2">
+            <div id="marqueeTrackLeft" class="marquee-track-up px-2 lg:px-3">
+                <!-- Populated by script.js -->
+            </div>
+        </div>
+    </aside>
+
+    <!-- RIGHT FULL-HEIGHT VERTICAL BANNER -->
+    <aside class="fixed right-0 top-0 bottom-0 z-30 hidden md:flex flex-col w-16 lg:w-20 marquee-banner-pillar-full border-l border-amberGold/25 overflow-hidden pointer-events-auto">
+        <div class="relative flex-1 overflow-hidden vertical-marquee-mask my-2">
+            <div id="marqueeTrackRight" class="marquee-track-down px-2 lg:px-3">
+                <!-- Populated by script.js -->
+            </div>
+        </div>
+    </aside>
+
+    <!-- WebGL Canvas Background -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-nav-light transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo Brand Mark -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="images/0.png" alt="Sri Sai Dhanada Enterprises Logo" class="w-10 h-10 object-contain">
+                    <div>
+                        <span class="font-heading font-bold text-base tracking-tight text-charcoal block leading-none">SRI SAI DHANADA</span>
+                        <span class="font-mono text-[10px] tracking-widest text-amberGold uppercase block mt-1 font-bold">ENTERPRISES</span>
+                    </div>
+                </a>
+
+                <!-- Back to Home Link -->
+                <a href="index.html" class="px-5 py-2.5 rounded font-mono text-xs font-bold uppercase tracking-wider bg-amberGold text-white hover:bg-charcoal transition-all shadow-md shadow-amberGold/20 flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Back to Home</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-16 pb-12 z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card-light text-amberGold font-mono text-xs uppercase tracking-widest border border-amberGold/30 font-semibold shadow-sm">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Help & Support Center</span>
+            </div>
+            <h1 class="font-heading text-4xl sm:text-5xl font-bold text-charcoal uppercase">
+                Frequently Asked <span class="text-amberGold">Questions</span>
+            </h1>
+            <p class="text-charcoalMuted text-base font-normal max-w-2xl mx-auto">
+                Find answers regarding our debt recovery operations, RBI compliance standards, portfolio handling, and agency empanelment.
+            </p>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="py-12 relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-4">
+            
+            <!-- Question 1 -->
+            <div class="glass-card-light rounded-lg overflow-hidden border border-amberGold/20 transition-all">
+                <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 font-heading font-bold text-lg text-charcoal focus:outline-none">
+                    <span>1. What loan products does Sri Sai Dhanada Enterprises handle?</span>
+                    <i class="fa-solid fa-chevron-down text-amberGold transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content hidden px-6 pb-6 text-charcoalMuted text-sm font-body leading-relaxed border-t border-amberGold/10 pt-4 space-y-2">
+                    <p>We handle a comprehensive range of retail and commercial credit products for Banks and NBFCs, including:</p>
+                    <ul class="list-disc list-inside space-y-1 font-mono text-xs text-charcoal">
+                        <li>Credit Cards</li>
+                        <li>Personal Loans (PL & PL Cross-Sell)</li>
+                        <li>Business Loans (BL)</li>
+                        <li>Consumer Durable Loans (CD)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="glass-card-light rounded-lg overflow-hidden border border-amberGold/20 transition-all">
+                <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 font-heading font-bold text-lg text-charcoal focus:outline-none">
+                    <span>2. How do you ensure strict RBI Fair Practices Compliance?</span>
+                    <i class="fa-solid fa-chevron-down text-amberGold transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content hidden px-6 pb-6 text-charcoalMuted text-sm font-body leading-relaxed border-t border-amberGold/10 pt-4">
+                    <p>We maintain a zero-tolerance policy across all branches. Every tele-calling station is connected to 100% recorded PRI interface lines, personal mobile phones are prohibited on calling floors, and staff undergo rigorous training on RBI guidelines regarding respectful customer communication and data confidentiality.</p>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="glass-card-light rounded-lg overflow-hidden border border-amberGold/20 transition-all">
+                <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 font-heading font-bold text-lg text-charcoal focus:outline-none">
+                    <span>3. Which regions and territories do you cover?</span>
+                    <i class="fa-solid fa-chevron-down text-amberGold transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content hidden px-6 pb-6 text-charcoalMuted text-sm font-body leading-relaxed border-t border-amberGold/10 pt-4">
+                    <p>We operate across 9 strategic branch locations covering the entire state of Andhra Pradesh and Telangana, including Visakhapatnam (HQ & Madhavadhara II), Vijayawada, Warangal, Karimnagar, Guntur, Secunderabad, Nellore, and Kadapa.</p>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="glass-card-light rounded-lg overflow-hidden border border-amberGold/20 transition-all">
+                <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 font-heading font-bold text-lg text-charcoal focus:outline-none">
+                    <span>4. What delinquency buckets / DPD stages do you manage?</span>
+                    <i class="fa-solid fa-chevron-down text-amberGold transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content hidden px-6 pb-6 text-charcoalMuted text-sm font-body leading-relaxed border-t border-amberGold/10 pt-4">
+                    <p>We provide full bucket coverage ranging from early-stage reminders (Bucket X, Buckets 2–3, Buckets 4–5) up to hardcore 180+ DPD write-off pools. Our team currently manages over ₹160 Cr+ in active portfolio mandates.</p>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="glass-card-light rounded-lg overflow-hidden border border-amberGold/20 transition-all">
+                <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 font-heading font-bold text-lg text-charcoal focus:outline-none">
+                    <span>5. How can a Bank or NBFC initiate agency empanelment?</span>
+                    <i class="fa-solid fa-chevron-down text-amberGold transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content hidden px-6 pb-6 text-charcoalMuted text-sm font-body leading-relaxed border-t border-amberGold/10 pt-4">
+                    <p>Financial institutions can contact our Head Office directly at Visakhapatnam. Contact S. Govinda Rao at <a href="tel:9290865555" class="text-amberGold font-bold underline">+91 92908 65555</a> or email <a href="mailto:ssdenterprisesvizag@gmail.com" class="text-amberGold font-bold underline">ssdenterprisesvizag@gmail.com</a> to request agency credentials and discuss portfolio allocation.</p>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="glass-card-light rounded-lg overflow-hidden border border-amberGold/20 transition-all">
+                <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 font-heading font-bold text-lg text-charcoal focus:outline-none">
+                    <span>6. What skip tracing & verification methodology do you use?</span>
+                    <i class="fa-solid fa-chevron-down text-amberGold transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content hidden px-6 pb-6 text-charcoalMuted text-sm font-body leading-relaxed border-t border-amberGold/10 pt-4">
+                    <p>We combine on-field physical address visits, tele-verification, and legal public-database lookups to trace non-contactable customers. Once located, a verified trace report is handed over to our dedicated recovery team for immediate follow-up.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Still Have Questions CTA -->
+    <section class="py-12 relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="glass-card-light p-8 rounded-lg text-center space-y-4 border border-amberGold/30">
+                <h3 class="font-heading text-2xl font-bold text-charcoal">Still Have Questions?</h3>
+                <p class="text-charcoalMuted text-sm">Reach out to our management team directly via our enquiry form on the main page.</p>
+                <div class="pt-2 flex justify-center gap-4">
+                    <a href="index.html#contact" 
+                       class="px-6 py-3 rounded font-mono text-xs font-bold uppercase bg-amberGold text-white hover:bg-charcoal transition-all shadow-md shadow-amberGold/20 flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Contact Us on Main Page</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer py-12 font-mono text-xs relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 site-footer-border">
+                <div>
+                    <div class="font-heading font-bold text-white text-lg tracking-tight">SRI SAI DHANADA ENTERPRISES</div>
+                    <div class="text-[11px] text-amberGold uppercase mt-0.5">Debt Recovery Agency & Management</div>
+                </div>
+
+                <div class="flex flex-wrap gap-6 site-footer-links">
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#compliance">Compliance</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[11px] site-footer-text">
+                <p>© 2026 Sri Sai Dhanada Enterprises. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <span>•</span>
+                    <span class="text-amberGold font-semibold">RBI Fair Practices Code Compliant</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Larger Translucent Pop-up Card -->
+    <div id="globalLogoTooltip" class="fixed hidden z-50 w-80 p-5 glass-popup-translucent text-white rounded-2xl border border-amberGold/40 pointer-events-none transition-all duration-150"></div>
+
+    <!-- FAQ Accordion JS Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.faq-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('i');
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+        });
+    </script>
+
+    <!-- External Shared JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
