@@ -257,9 +257,9 @@ body {
 /* 3. Pulse Ring (Reduced from 1.6rem -> 1.1rem) */
 .glow-pulse-ring {
     position: absolute;
-    width: 1.1rem;
-    height: 1.1rem;
-    background-color: rgba(245, 166, 35, 0.5);
+    width: 1.4rem;
+    height: 1.4rem;
+    background-color: rgba(233, 131, 7, 0.5);
     border-radius: 9999px;
     animation: glowPulse 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
     z-index: 1;
@@ -340,4 +340,26 @@ body {
         font-size: 7px;
         padding: 1px 3px;
     }
+}
+
+/* //for acccuracy of mouse hover on map */
+/* Ensure labels and pulse rings do not block mouse clicks or hovers */
+.glow-pin-label, 
+.glow-pulse-ring, 
+.hq-glow-halo {
+    pointer-events: none !important;
+}
+
+/* Precise 24px Invisible Hit Target for Pins */
+.pin-hit-target {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 9999px;
+    cursor: pointer;
+    pointer-events: auto !important;
+    z-index: 10;
 }

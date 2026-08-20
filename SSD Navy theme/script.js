@@ -1,4 +1,4 @@
-// // 1. Programmatic Smooth Scroll (Lenis.js) safely wrapped
+// 1. Programmatic Smooth Scroll (Lenis.js) safely wrapped
 // let lenis = null;
 // if (typeof Lenis !== 'undefined') {
 //     lenis = new Lenis({
@@ -15,18 +15,18 @@
 //     requestAnimationFrame(lenisRaf);
 // }
 
-// // Scroll to hash target on load (if coming from faq.html#contact) or reset to top
-// window.addEventListener('load', () => {
-//     if (window.location.hash) {
-//         const target = document.querySelector(window.location.hash);
-//         if (target && lenis) {
-//             lenis.scrollTo(target);
-//         }
-//     } else {
-//         window.scrollTo(0, 0);
-//         if (lenis) lenis.scrollTo(0, { immediate: true });
-//     }
-// });
+// Handle hash navigation on load or scroll to top
+window.addEventListener('load', () => {
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target && lenis) {
+            lenis.scrollTo(target);
+        }
+    } else {
+        window.scrollTo(0, 0);
+        if (lenis) lenis.scrollTo(0, { immediate: true });
+    }
+});
 
 // 2. WebGL / Three.js 3D Background Engine
 let scene, camera, renderer, particleSystem, floatingNodes = [];
@@ -60,9 +60,8 @@ function initWebGL() {
         const positions = new Float32Array(particleCount * 3);
         const colors = new Float32Array(particleCount * 3);
 
-        // Line 66 in script.js:
-        const colorAmber = new THREE.Color(0xE2B13C);  // Metallic Gold
-        const colorBronze = new THREE.Color(0x1E40AF); // Royal Blue Accent
+        const colorAmber = new THREE.Color(0xD97706);
+        const colorBronze = new THREE.Color(0xB45309);
 
         for (let i = 0; i < particleCount * 3; i += 3) {
             positions[i] = (Math.random() - 0.5) * 80;
@@ -286,7 +285,7 @@ const bankPartners = [
     { name: "ICICI Bank", file: "icici.png", domain: "icicibank.com", segment: "Credit Cards · PL · BL · CD", pool: "₹52 Cr+", bucket: "Bkt X–6 & 180+ DPD", coverage: "AP & Telangana" },
     { name: "State Bank of India", file: "sbi.png", domain: "sbi.co.in", segment: "Consumer Durable 180+", pool: "₹16 Cr", bucket: "CD2 · 180+ DPD", coverage: "Overall AP" },
     { name: "Axis Bank", file: "axis.png", domain: "axisbank.com", segment: "Credit Cards · PL · BL", pool: "₹14 Cr", bucket: "Bkt X · 180+ DPD", coverage: "Overall AP" },
-    { name: "RBL Bank", file: "rbl.png", domain: "rblbank.com", segment: "Credit Cards", pool: "₹7.5 Cr", bucket: "Bkt 2, 4, 5, 6", coverage: "VJA · Vizag · Guntur" },
+    { name: "RBL Bank", file: "rbl.png", domain: "rbl.png", segment: "Credit Cards", pool: "₹7.5 Cr", bucket: "Bkt 2, 4, 5, 6", coverage: "VJA · Vizag · Guntur" },
     { name: "IDFC First Bank", file: "idfc.png", domain: "idfcfirstbank.com", segment: "PL Cross-Sell", pool: "₹11 Cr", bucket: "X Bucket", coverage: "Guntur & Visakhapatnam" },
     { name: "Home Credit", file: "home credit.png", domain: "homecredit.co.in", segment: "Business Loans", pool: "₹5 Cr", bucket: "180+ DPD", coverage: "Visakhapatnam" },
     { name: "Kinara Capital", file: "kinara.png", domain: "kinaracapital.com", segment: "Business Loans", pool: "₹10 Cr", bucket: "Mixed Buckets", coverage: "Overall AP" },
@@ -385,3 +384,102 @@ function buildVerticalMarquees() {
 }
 
 window.addEventListener('DOMContentLoaded', buildVerticalMarquees);
+
+// ====================================
+// MAP PIN HOVER ADDRESS POP-UP ENGINE
+// ====================================
+const mapBranchAddresses = {
+    'vizag-hq': {
+        title: "Visakhapatnam Head Office",
+        address: "D.No. 39-11-5, Sri Srinivasa Towers, AXIS Bank Upstairs, 4th Floor, Murali Nagar, Visakhapatnam – 530007"
+    },
+    'vizag-2': {
+        title: "Visakhapatnam — Madhavadhara II",
+        address: "Madhavadhara Phase II, Visakhapatnam, Andhra Pradesh"
+    },
+    'bhubaneswar': {
+        title: "Bhubaneswar Branch",
+        address: "Eastern Region Operations Hub, Bhubaneswar, Odisha"
+    },
+    'vijayawada': {
+        title: "Vijayawada Branch",
+        address: "Central AP Regional Center, Vijayawada, Andhra Pradesh"
+    },
+    'guntur': {
+        title: "Guntur Branch",
+        address: "PL Cross-Sell Division, Guntur, Andhra Pradesh"
+    },
+    'secunderabad': {
+        title: "Secunderabad Branch",
+        address: "Telangana Regional Hub, Secunderabad, Telangana"
+    },
+    'warangal': {
+        title: "Warangal Branch",
+        address: "North Telangana Division, Warangal, Telangana"
+    },
+    'karimnagar': {
+        title: "Karimnagar Branch",
+        address: "Karimnagar Center, Telangana"
+    },
+    'nellore': {
+        title: "Nellore Branch",
+        address: "South AP Division, Nellore, Andhra Pradesh"
+    },
+    'kadapa': {
+        title: "Kadapa Branch",
+        address: "Rayalaseema Region, Kadapa, Andhra Pradesh"
+    }
+};
+
+function initMapPinHoverPopups() {
+    const pins = document.querySelectorAll('.map-pin-hover');
+    
+    pins.forEach(pin => {
+        // Use 'mouseover' so moving directly to an adjacent pin updates immediately
+        pin.addEventListener('mouseover', (e) => {
+            e.stopPropagation();
+            const branchKey = pin.getAttribute('data-branch');
+            const data = mapBranchAddresses[branchKey];
+            if (!data) return;
+
+            const tooltip = document.getElementById('globalLogoTooltip');
+            if (!tooltip) return;
+
+            const rect = pin.getBoundingClientRect();
+
+            tooltip.innerHTML = `
+                <div class="flex items-center gap-2.5 pb-2.5 mb-2.5 border-b border-white/15">
+                    <i class="fa-solid fa-location-dot text-amberGold text-base"></i>
+                    <div>
+                        <span class="font-heading font-bold text-sm text-white block leading-tight">${data.title}</span>
+                    </div>
+                </div>
+                <div class="space-y-2 font-mono text-[11px]">
+                    <div class="text-slate-200 font-sans text-xs leading-relaxed">
+                        ${data.address}
+                    </div>
+                </div>
+            `;
+
+            const tooltipWidth = 320;
+            let topPos = rect.top + (rect.height / 2) - 75;
+            topPos = Math.max(15, Math.min(window.innerHeight - 190, topPos));
+
+            let leftPos = rect.right + 14;
+            if (leftPos + tooltipWidth > window.innerWidth - 20) {
+                leftPos = rect.left - tooltipWidth - 14;
+            }
+
+            tooltip.style.top = `${topPos}px`;
+            tooltip.style.left = `${leftPos}px`;
+            tooltip.classList.remove('hidden');
+        });
+
+        pin.addEventListener('mouseleave', () => {
+            const tooltip = document.getElementById('globalLogoTooltip');
+            if (tooltip) tooltip.classList.add('hidden');
+        });
+    });
+}
+
+window.addEventListener('DOMContentLoaded', initMapPinHoverPopups);

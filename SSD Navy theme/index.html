@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sri Sai Dhanada Enterprises | Debt Recovery Agency & Management</title>
     
+    <!-- Instant Page Prefetch for Fast FAQ Loading -->
+    <link rel="prefetch" href="faq.html">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,32 +23,31 @@
     <!-- Three.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- Lenis Smooth Scroll CDN
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script> -->
 
     <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    bgBright: '#050B1A',
-                    paperLight: '#0A142F',
-                    surfaceWhite: '#0F1C3F',
-                    charcoal: '#F8FAFC',
-                    charcoalMuted: '#94A3B8',
-                    amberGold: '#E2B13C',
-                    terracotta: '#38BDF8',
-                    warmBorder: 'rgba(226, 177, 60, 0.25)',
-                },
-                fontFamily: {
-                    heading: ['Space Grotesk', 'sans-serif'],
-                    body: ['Inter', 'sans-serif'],
-                    mono: ['IBM Plex Mono', 'monospace'],
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgBright: '#050B1A',
+                        paperLight: '#0A142F',
+                        surfaceWhite: '#0F1C3F',
+                        charcoal: '#F8FAFC',
+                        charcoalMuted: '#94A3B8',
+                        amberGold: '#E2B13C',
+                        terracotta: '#38BDF8',
+                        warmBorder: 'rgba(226, 177, 60, 0.25)',
+                    },
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                        mono: ['IBM Plex Mono', 'monospace'],
+                    }
                 }
             }
         }
-    }
-</script>
+    </script>
+
     <!-- External Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -77,7 +80,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <a href="#" class="flex items-center gap-3 group">
-                    <img src="images/0.png" alt="Sri Sai Dhanada Enterprises Logo" class="w-10 h-10 object-contain">
+                    <img src="images/0.png" alt="Sri Sai Dhanada Enterprises Logo" class="w-10 h-10 object-contain" decoding="async">
                     <div>
                         <span class="font-heading font-bold text-base tracking-tight text-charcoal block leading-none">SRI SAI DHANADA</span>
                         <span class="font-mono text-[10px] tracking-widest text-amberGold uppercase block mt-1 font-bold">ENTERPRISES</span>
@@ -178,7 +181,7 @@
 
                 <div class="glass-card-light tilt-card p-6 rounded text-left data-parallax" data-speed="0.07">
                     <div class="font-mono text-3xl sm:text-4xl font-bold text-amberGold tracking-tight">
-                        <span class="counter" data-target="9">0</span>
+                        <span class="counter" data-target="10">0</span>
                     </div>
                     <div class="font-mono text-xs uppercase text-charcoalMuted font-semibold tracking-wider mt-2">Branch Network</div>
                 </div>
@@ -190,112 +193,90 @@
         </div>
     </section>
 
-    <!-- Map begins here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-    <!-- 3D INDIA MAP SECTION WITH MAP.PNG -->
+    <!-- SECTION 3D INDIA MAP -->
     <section id="map-3d-section" class="py-20 relative z-10 border-t border-amberGold/15 bg-paperLight/60">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-center">
-            
-            <!-- Section Header -->
             <div class="max-w-2xl mx-auto space-y-2">
-                <span class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">OUR PRESENCE</span>
                 <h2 class="font-heading text-3xl sm:text-4xl font-bold text-charcoal uppercase">Branch Locations Across India</h2>
-                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Head Office & Regional Branch Network</p>
+                <p class="font-mono text-xs text-charcoalMuted uppercase font-semibold">Tap or hover on any pin to view location details</p>
             </div>
 
-            <!-- Clean Map Image Wrapper (NO Outer Card Container) -->
             <div class="relative w-full aspect-square max-w-2xl mx-auto rounded-2xl overflow-hidden border border-amberGold/30 shadow-2xl">
-                
-                <!-- 3D India Relief Map Image -->
-                <img src="images/map.png" alt="India 3D Relief Map" class="w-full h-full object-cover">
+                <img src="images/map.png" alt="India 3D Relief Map" class="w-full h-full object-cover" decoding="async">
 
-                <!-- ==================== ACCURATE GLOWING LOCATION PINS ==================== -->
-
-                <!-- 1. VISAKHAPATNAM (HEAD OFFICE) — HIGHLIGHTED GOLDEN STAR -->
-                <div class="glow-pin-wrapper" style="top: 63%; left: 54%;">
+                <!-- 1. VISAKHAPATNAM (HEAD OFFICE) -->
+                <div class="glow-pin-wrapper map-pin-hover cursor-pointer pointer-events-auto" data-branch="vizag-hq" style="top: 63%; left: 54%;">
+                    <div class="pin-hit-target map-pin-hover" data-branch="vizag-hq"></div>
                     <div class="hq-glow-halo"></div>
                     <div class="hq-star-center"><i class="fa-solid fa-star text-[7px] text-white"></i></div>
-                    <span class="glow-pin-label hq-gold-badge text-xs">VISAKHAPATNAM (HEAD OFFICE)</span>
+                    <span class="glow-pin-label hq-gold-badge">VISAKHAPATNAM (HEAD OFFICE)</span>
                 </div>
 
                 <!-- 2. Visakhapatnam - Madhavadhara II -->
-                <div class="glow-pin-wrapper" style="top: 63%; left: 53%;">
+                <div class="glow-pin-wrapper map-pin-hover cursor-pointer pointer-events-auto" data-branch="vizag-2" style="top: 63%; left: 53%;">
+                    <div class="pin-hit-target map-pin-hover" data-branch="vizag-2"></div>
                     <span class="glow-pulse-ring"></span>
                     <span class="glow-dot-terracotta"></span>
-                    <!-- <span class="glow-pin-label label-pos-right">Madhavadhara II</span> -->
                 </div>
 
                 <!-- 3. Bhubaneswar (Odisha) -->
-                <div class="glow-pin-wrapper" style="top: 56.7%; left: 56.9%;">
+                <div class="glow-pin-wrapper map-pin-hover cursor-pointer pointer-events-auto" data-branch="bhubaneswar" style="top: 56.7%; left: 59.7%;">
+                    <div class="pin-hit-target map-pin-hover" data-branch="bhubaneswar"></div>
                     <span class="glow-pulse-ring"></span>
                     <span class="glow-dot"></span>
-                    <!-- <span class="glow-pin-label label-pos-right">Bhubaneswar (Odisha)</span> -->
                 </div>
 
                 <!-- 4. Vijayawada -->
-                <div class="glow-pin-wrapper" style="top: 67.72%; left: 46%;">
+                <div class="glow-pin-wrapper map-pin-hover cursor-pointer pointer-events-auto" data-branch="vijayawada" style="top: 67.72%; left: 46%;">
+                    <div class="pin-hit-target map-pin-hover" data-branch="vijayawada"></div>
                     <span class="glow-pulse-ring"></span>
                     <span class="glow-dot"></span>
-                    <!-- <span class="glow-pin-label label-pos-right">Vijayawada</span> -->
                 </div>
 
                 <!-- 5. Guntur -->
-                <div class="glow-pin-wrapper" style="top: 67%; left: 47%;">
+                <div class="glow-pin-wrapper map-pin-hover cursor-pointer pointer-events-auto" data-branch="guntur" style="top: 67%; left: 47%;">
+                    <div class="pin-hit-target map-pin-hover" data-branch="guntur"></div>
                     <span class="glow-pulse-ring"></span>
                     <span class="glow-dot"></span>
-                    <!-- <span class="glow-pin-label label-pos-left">Guntur</span> -->
                 </div>
 
                 <!-- 6. Secunderabad -->
-                <div class="glow-pin-wrapper" style="top: 63.8%; left: 40%;">
+                <div class="glow-pin-wrapper map-pin-hover cursor-pointer pointer-events-auto" data-branch="secunderabad" style="top: 63.8%; left: 40%;">
+                    <div class="pin-hit-target map-pin-hover" data-branch="secunderabad"></div>
                     <span class="glow-pulse-ring"></span>
                     <span class="glow-dot"></span>
-                    <!-- <span class="glow-pin-label label-pos-left">Secunderabad</span> -->
                 </div>
 
                 <!-- 7. Warangal -->
-                <div class="glow-pin-wrapper" style="top: 63.2%; left: 42.1%;">
+                <div class="glow-pin-wrapper map-pin-hover cursor-pointer pointer-events-auto" data-branch="warangal" style="top: 63.2%; left: 42.1%;">
+                    <div class="pin-hit-target map-pin-hover" data-branch="warangal"></div>
                     <span class="glow-pulse-ring"></span>
                     <span class="glow-dot"></span>
-                    <!-- <span class="glow-pin-label label-pos-right">Warangal</span> -->
                 </div>
 
                 <!-- 8. Karimnagar -->
-                <div class="glow-pin-wrapper" style="top: 62.3%; left: 40.5%;">
+                <div class="glow-pin-wrapper map-pin-hover cursor-pointer pointer-events-auto" data-branch="karimnagar" style="top: 62.3%; left: 40.5%;">
+                    <div class="pin-hit-target map-pin-hover" data-branch="karimnagar"></div>
                     <span class="glow-pulse-ring"></span>
                     <span class="glow-dot"></span>
-                    <!-- <span class="glow-pin-label label-pos-left">Karimnagar</span> -->
                 </div>
 
                 <!-- 9. Nellore -->
-                <div class="glow-pin-wrapper" style="top: 73%; left: 42.7%;">
+                <div class="glow-pin-wrapper map-pin-hover cursor-pointer pointer-events-auto" data-branch="nellore" style="top: 73%; left: 42.7%;">
+                    <div class="pin-hit-target map-pin-hover" data-branch="nellore"></div>
                     <span class="glow-pulse-ring"></span>
                     <span class="glow-dot"></span>
-                    <!-- <span class="glow-pin-label label-pos-right">Nellore</span> -->
                 </div>
 
                 <!-- 10. Kadapa -->
-                <div class="glow-pin-wrapper" style="top: 73.3%; left:39.4%;">
+                <div class="glow-pin-wrapper map-pin-hover cursor-pointer pointer-events-auto" data-branch="kadapa" style="top: 73.3%; left: 39.4%;">
+                    <div class="pin-hit-target map-pin-hover" data-branch="kadapa"></div>
                     <span class="glow-pulse-ring"></span>
                     <span class="glow-dot"></span>
-                    <!-- <span class="glow-pin-label label-pos-left">Kadapa</span> -->
                 </div>
-
             </div>
-
-            <!-- Legend Bar Below Map -->
-            <!-- <div class="pt-2 flex flex-wrap items-center justify-center gap-6 font-mono text-xs text-charcoalMuted">
-                <div class="flex items-center gap-2">
-                    <span class="w-4 h-4 rounded-full bg-amberGold flex items-center justify-center text-[8px] text-white font-bold shadow-md"><i class="fa-solid fa-star"></i></span>
-                    <span class="font-bold text-charcoal">Head Office (Visakhapatnam)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-amberGold shadow-sm"></span>
-                    <span>Regional Branch Network (10 Locations)</span>
-                </div>
-            </div> -->
         </div>
     </section>
-    <!-- Map ends here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
     <!-- SECTION 2: INTRODUCTION / PARTNER LETTER -->
     <section class="py-20 relative z-10 border-t border-amberGold/15 bg-paperLight/60">
@@ -415,51 +396,51 @@
                 <div class="font-mono text-xs uppercase tracking-widest text-amberGold font-bold">OUR NATIONAL FINANCIAL PARTNERS</div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-body text-sm text-charcoal font-semibold">
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/icici.png" alt="ICICI Bank Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/icici.png" alt="ICICI Bank Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>ICICI Bank (All Products)</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/sbi.png" alt="SBI Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/sbi.png" alt="SBI Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>State Bank of India</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/axis.png" alt="Axis Bank Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/axis.png" alt="Axis Bank Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>Axis Bank</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/rbl.png" alt="RBL Bank Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/rbl.png" alt="RBL Bank Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>RBL & BRBL</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/idfc.png" alt="IDFC First Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/idfc.png" alt="IDFC First Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>IDFC First Bank</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/home credit.png" alt="Home Credit Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/home credit.png" alt="Home Credit Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>Home Credit</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/kinara.png" alt="Kinara Capital Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/kinara.png" alt="Kinara Capital Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>Kinara Capital</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/lendingkart.png" alt="Lendingkart Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/lendingkart.png" alt="Lendingkart Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>Lendingkart</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/piramal.png" alt="Piramal Finance Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/piramal.png" alt="Piramal Finance Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>Piramal Finance</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/navi.png" alt="Navi Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/navi.png" alt="Navi Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>Navi</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/tvs.png" alt="TVS Credit Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/tvs.png" alt="TVS Credit Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>TVS Credit</span>
                     </div>
                     <div class="flex items-center gap-3 p-2.5 rounded bg-surfaceWhite border border-amberGold/15 shadow-sm hover:border-amberGold/40 transition-all">
-                        <img src="logo/one card.png" alt="IARC Logo" class="w-6 h-6 rounded object-contain shrink-0">
+                        <img src="logo/one card.png" alt="IARC Logo" class="w-6 h-6 rounded object-contain shrink-0" decoding="async">
                         <span>IARC & One Card</span>
                     </div>
                 </div>
@@ -538,7 +519,7 @@
             </div>
 
             <div class="flex justify-center items-center w-full my-8">
-                <img src="images/1.png" alt="Operations Floor" class="max-w-lg w-full h-auto rounded-lg border border-amberGold/20 shadow-md">
+                <img src="images/1.png" alt="Operations Floor" class="max-w-lg w-full h-auto rounded-lg border border-amberGold/20 shadow-md" decoding="async">
             </div>
         </div>                  
     </section>
@@ -554,43 +535,43 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="glass-card-light rounded p-4 space-y-3">
-                    <img src="images/2.png" alt="Vijayawada Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <img src="images/2.png" alt="Vijayawada Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy" decoding="async">
                     <div class="font-heading font-bold text-charcoal text-base">1. Vijayawada</div>
                 </div>
                 <div class="glass-card-light rounded p-4 space-y-3">
-                    <img src="images/3.png" alt="Warangal Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <img src="images/3.png" alt="Warangal Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy" decoding="async">
                     <div class="font-heading font-bold text-charcoal text-base">2. Warangal</div>
                 </div>
                 <div class="glass-card-light rounded p-4 space-y-3">
-                    <img src="images/4.png" alt="Karimnagar Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <img src="images/4.png" alt="Karimnagar Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy" decoding="async">
                     <div class="font-heading font-bold text-charcoal text-base">3. Karimnagar</div>
                 </div>
                 <div class="glass-card-light rounded p-4 space-y-3">
-                    <img src="images/5.png" alt="Guntur Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <img src="images/5.png" alt="Guntur Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy" decoding="async">
                     <div class="font-heading font-bold text-charcoal text-base">4. Guntur</div>
                 </div>
                 <div class="glass-card-light rounded p-4 space-y-3">
-                    <img src="images/6.png" alt="Secunderabad Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <img src="images/6.png" alt="Secunderabad Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy" decoding="async">
                     <div class="font-heading font-bold text-charcoal text-base">5. Secunderabad</div>
                 </div>
                 <div class="glass-card-light rounded p-4 space-y-3">
-                    <img src="images/7.png" alt="Nellore Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <img src="images/7.png" alt="Nellore Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy" decoding="async">
                     <div class="font-heading font-bold text-charcoal text-base">6. Nellore</div>
                 </div>
                 <div class="glass-card-light rounded p-4 space-y-3">
-                    <img src="images/8.png" alt="Visakhapatnam Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <img src="images/8.png" alt="Visakhapatnam Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy" decoding="async">
                     <div class="font-heading font-bold text-charcoal text-base">7. Visakhapatnam - Madhavadhara</div>
                 </div>
                 <div class="glass-card-light rounded p-4 space-y-3">
-                    <img src="images/9.png" alt="Kadapa Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <img src="images/9.png" alt="Kadapa Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy" decoding="async">
                     <div class="font-heading font-bold text-charcoal text-base">8. Kadapa</div>
                 </div>
                 <div class="glass-card-light rounded p-4 space-y-3">
-                    <img src="images/10.png" alt="Visakhapatnam II Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <img src="images/10.png" alt="Visakhapatnam II Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy" decoding="async">
                     <div class="font-heading font-bold text-charcoal text-base">9. Visakhapatnam - Madhavadhara II</div>
                 </div>
                 <div class="glass-card-light rounded p-4 space-y-3">
-                    <img src="images/14.png" alt="Visakhapatnam II Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy">
+                    <img src="images/14.png" alt="Bhubaneshwar Branch" class="h-36 w-full object-cover rounded border border-amberGold/20 shadow-sm" loading="lazy" decoding="async">
                     <div class="font-heading font-bold text-charcoal text-base">10. Bhubaneshwar - Odisha</div>
                 </div>
             </div>
@@ -635,7 +616,7 @@
                 </div>
 
                 <div class="lg:col-span-5">
-                    <img src="images/10.png" alt="Tele-calling Floor" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy">
+                    <img src="images/10.png" alt="Tele-calling Floor" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy" decoding="async">
                 </div>
             </div>
 
@@ -682,7 +663,7 @@
                 </div>
 
                 <div class="lg:col-span-5">
-                    <img src="images/11.png" alt="Field Fleet" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy">
+                    <img src="images/11.png" alt="Field Fleet" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -788,8 +769,8 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <img src="images/12.png" alt="Tele operations" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy">
-                <img src="images/13.png" alt="Infra details" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy">
+                <img src="images/12.png" alt="Tele operations" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy" decoding="async">
+                <img src="images/13.png" alt="Infra details" class="w-full h-64 object-cover rounded-lg border border-amberGold/20 shadow-md" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -1225,57 +1206,57 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="referenceGrid">
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="icici">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">ICICI BANK</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Madhu Babu</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mr. Madhu Babu</div>
                     <div class="font-mono text-xs text-charcoalMuted">ICICI Bank · Manager</div>
                 </div>
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="icici">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">ICICI BANK</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Sai</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mr. Sai</div>
                     <div class="font-mono text-xs text-charcoalMuted">ICICI Bank · Manager</div>
                 </div>
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="icici">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">ICICI BANK</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Ramanathan</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mr. Ramanathan</div>
                     <div class="font-mono text-xs text-charcoalMuted">ICICI Bank · Manager</div>
                 </div>
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="icici">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">ICICI BANK</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Althaf</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mr. Althaf</div>
                     <div class="font-mono text-xs text-charcoalMuted">ICICI Bank · Manager</div>
                 </div>
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="axis">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">AXIS BANK</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Lokesh</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mr. Lokesh</div>
                     <div class="font-mono text-xs text-charcoalMuted">Axis Bank · Manager</div>
                 </div>
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="axis">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">AXIS BANK</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Hari Krishna</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mr. Hari Krishna</div>
                     <div class="font-mono text-xs text-charcoalMuted">Axis Bank · Manager</div>
                 </div>
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="axis">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">AXIS BANK</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Geetha</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mrs. Geetha</div>
                     <div class="font-mono text-xs text-charcoalMuted">Axis Bank · Manager</div>
                 </div>
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="axis">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">AXIS BANK</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Balasubbaraju</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mr. Balasubbaraju</div>
                     <div class="font-mono text-xs text-charcoalMuted">Axis Bank · Manager</div>
                 </div>
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="rbl">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">RBL BANK</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Shivaji</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mr. Shivaji</div>
                     <div class="font-mono text-xs text-charcoalMuted">RBL · Manager</div>
                 </div>
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="rbl">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">RBL BANK</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Uday</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mr. Uday</div>
                     <div class="font-mono text-xs text-charcoalMuted">RBL · Manager</div>
                 </div>
                 <div class="glass-card-light tilt-card p-5 rounded space-y-3 ref-card" data-bank="navi">
                     <span class="tag-amber-filled px-2 py-0.5 rounded text-[10px]">NAVI</span>
-                    <div class="font-heading font-bold text-charcoal text-base">Ashok</div>
+                    <div class="font-heading font-bold text-charcoal text-base">Mr. Ashok</div>
                     <div class="font-mono text-xs text-charcoalMuted">Navi · Manager</div>
                 </div>
             </div>
