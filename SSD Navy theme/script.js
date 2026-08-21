@@ -127,6 +127,9 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
+// Cache parallax elements once so the DOM isn't searched 60 times/sec
+let parallaxElements = null;
+
 function animateWebGL() {
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
@@ -152,6 +155,17 @@ function animateWebGL() {
     });
 
     if (renderer && scene && camera) {
+        // Skips mobile (<768px) and reduced-motion preference
+        if (window.innerWidth >= 768 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            if (!parallaxElements) {
+                parallaxElements = document.querySelectorAll('.data-parallax'); // Cache once
+            }
+            const currentScrollY = window.scrollY;
+            parallaxElements.forEach(el => {
+                const speed = parseFloat(el.getAttribute('data-speed') || 0.05);
+                el.style.transform = `translateY(${currentScrollY * speed * -1}px)`;
+            });
+        }
         renderer.render(scene, camera);
     }
 
@@ -314,41 +328,49 @@ function createMarqueeLogoNode(bank, tooltipDirection) {
 
         const rect = card.getBoundingClientRect();
 
+        // 20% Reduced Popup Content
         tooltip.innerHTML = `
-            <div class="flex items-center gap-3 pb-3 mb-3 border-b border-white/15">
-                <img src="logo/${bank.file}" class="w-7 h-7 object-contain" onerror="this.src='https://www.google.com/s2/favicons?domain=${bank.domain}&sz=64'">
+            <div class="flex items-center gap-2.5 pb-2.5 mb-2.5 border-b border-white/15">
+                <img src="logo/${bank.file}" class="w-6 h-6 object-contain" onerror="this.src='https://www.google.com/s2/favicons?domain=${bank.domain}&sz=64'">
                 <div>
-                    <span class="font-heading font-bold text-sm text-white block leading-tight">${bank.name}</span>
-                    <span class="font-mono text-[10px] text-amberGold uppercase font-semibold">National Partner</span>
+                    <span class="font-heading font-bold text-xs text-white block leading-tight">${bank.name}</span>
+                    <span class="font-mono text-[9.5px] text-amberGold uppercase font-semibold">National Partner</span>
                 </div>
             </div>
-            <div class="space-y-2.5 font-mono text-xs">
-                <div class="flex justify-between items-center bg-white/5 p-2 rounded-lg border border-white/10">
+            <div class="space-y-2 font-mono text-xs">
+                <div class="flex justify-between items-center bg-white/5 p-1.5 rounded-lg border border-white/10">
                     <span class="text-slate-300 font-sans text-xs">Active Managed Pool:</span>
-                    <span class="text-amberGold font-bold text-sm font-mono">${bank.pool}</span>
+                    <span class="text-amberGold font-bold text-xs font-mono">${bank.pool}</span>
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center text-[11px]">
                     <span class="text-slate-400 font-sans">Loan Segment:</span>
                     <span class="text-slate-200 font-sans font-semibold">${bank.segment}</span>
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center text-[11px]">
                     <span class="text-slate-400 font-sans">Bucket Stage:</span>
-                    <span class="text-slate-200 font-mono text-xs">${bank.bucket}</span>
+                    <span class="text-slate-200 font-mono">${bank.bucket}</span>
                 </div>
-                <div class="flex justify-between items-center pt-2 border-t border-white/10 text-xs">
+                <div class="flex justify-between items-center pt-1.5 border-t border-white/10 text-[11px]">
                     <span class="text-slate-400 font-sans">Regional Coverage:</span>
                     <span class="text-amberGold font-semibold font-sans">${bank.coverage}</span>
                 </div>
             </div>
         `;
 
-        const tooltipWidth = 320;
-        let topPos = rect.top + (rect.height / 2) - 85;
-        topPos = Math.max(15, Math.min(window.innerHeight - 230, topPos));
+        // 256px Width (Matching w-64 in CSS)
+        const tooltipWidth = 256;
 
-        let leftPos = tooltipDirection === 'right' 
-            ? rect.right + 16 
-            : rect.left - tooltipWidth - 16;
+        // Vertical Centering
+        let topPos = rect.top + (rect.height / 2) - 80;
+        topPos = Math.max(15, Math.min(window.innerHeight - 220, topPos));
+
+        // Precise Horizontal Positioning
+        let leftPos;
+        if (tooltipDirection === 'right') {
+            leftPos = rect.right + 12; // 12px gap to the right of left sidebar
+        } else {
+            leftPos = rect.left - tooltipWidth - 12; // 12px gap to the left of right sidebar
+        }
 
         tooltip.style.top = `${topPos}px`;
         tooltip.style.left = `${leftPos}px`;
@@ -435,7 +457,6 @@ function initMapPinHoverPopups() {
     const pins = document.querySelectorAll('.map-pin-hover');
     
     pins.forEach(pin => {
-        // Use 'mouseover' so moving directly to an adjacent pin updates immediately
         pin.addEventListener('mouseover', (e) => {
             e.stopPropagation();
             const branchKey = pin.getAttribute('data-branch');
@@ -447,27 +468,34 @@ function initMapPinHoverPopups() {
 
             const rect = pin.getBoundingClientRect();
 
+            // 20% Smaller Content Typography & Spacing
             tooltip.innerHTML = `
-                <div class="flex items-center gap-2.5 pb-2.5 mb-2.5 border-b border-white/15">
-                    <i class="fa-solid fa-location-dot text-amberGold text-base"></i>
+                <div class="flex items-center gap-2 pb-2 mb-2 border-b border-white/15">
+                    <i class="fa-solid fa-location-dot text-amberGold text-xs"></i>
                     <div>
-                        <span class="font-heading font-bold text-sm text-white block leading-tight">${data.title}</span>
+                        <span class="font-heading font-bold text-xs text-white block leading-tight">${data.title}</span>
                     </div>
                 </div>
-                <div class="space-y-2 font-mono text-[11px]">
-                    <div class="text-slate-200 font-sans text-xs leading-relaxed">
+                <div class="space-y-1 font-mono text-[10px]">
+                    <div class="text-slate-200 font-sans text-[11px] leading-relaxed">
                         ${data.address}
                     </div>
                 </div>
             `;
 
-            const tooltipWidth = 320;
-            let topPos = rect.top + (rect.height / 2) - 75;
-            topPos = Math.max(15, Math.min(window.innerHeight - 190, topPos));
+            // 20% Reduced Width (256px)
+            const tooltipWidth = 256;
 
-            let leftPos = rect.right + 14;
-            if (leftPos + tooltipWidth > window.innerWidth - 20) {
-                leftPos = rect.left - tooltipWidth - 14;
+            // 1. Center Horizontally Over the Pin
+            let leftPos = rect.left + (rect.width / 2) - (tooltipWidth / 2);
+            leftPos = Math.max(10, Math.min(window.innerWidth - tooltipWidth - 10, leftPos));
+
+            // 2. Position TOP Above the Pin
+            let topPos = rect.top - 105;
+
+            // Fallback: If pin is too close to top of screen, show popup below pin
+            if (topPos < 10) {
+                topPos = rect.bottom + 12;
             }
 
             tooltip.style.top = `${topPos}px`;
