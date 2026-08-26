@@ -1,4 +1,53 @@
+# Allow all web search engines and generic crawlers
 User-agent: *
+Allow: /
+
+# OpenAI Crawlers (ChatGPT browsing, training & Search)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Google AI & Gemini Crawlers
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity AI Search Crawler
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic (Claude) Crawlers
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Apple AI & Intelligence Crawler
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI Crawler
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Cohere AI Crawler
+User-agent: cohere-ai
+Allow: /
+
+# Common Crawl (widely used for open-source AI training datasets)
+User-agent: CCBot
+Allow: /
+
+# Link to your XML Sitemap
+Sitemap: https://www.ssdenterprises.org.in/sitemap.xmlUser-agent: *
 Allow: /
 
 Sitemap: https://www.ssdenterprises.org.in/sitemap.xml
